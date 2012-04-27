@@ -96,7 +96,7 @@ PUBLIC int fs_readwrite(void)
 	  }
 	  
 	  /* Read or write 'chunk' bytes. */
-      printf("In READ\tUID: %n",caller_uid);
+      printf("In READ\tUID: %d",getuid());
 	  r = rw_chunk(rip, cvul64((unsigned long) position), off, chunk,
 	  	       nrbytes, rw_flag, gid, cum_io, block_size, &completed);
 
@@ -231,7 +231,7 @@ int *completed;			/* number of bytes copied */
   int n, block_spec;
   block_t b;
   dev_t dev;
-  printf("In Chunk\tUID: %d\n",caller_uid);
+  printf("In Chunk\tUID: %d\n",getuid());
   *completed = 0;
 
   block_spec = (rip->i_mode & I_TYPE) == I_BLOCK_SPECIAL;
