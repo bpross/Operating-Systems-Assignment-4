@@ -83,7 +83,7 @@ PUBLIC int fs_new_driver(void)
   return(OK);
 }
 
-int fs_setkey()
+int do_setkey()
 {
     
     int k0 = fs_m_in.m1_i1;
