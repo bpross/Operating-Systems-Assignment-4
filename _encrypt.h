@@ -1,5 +1,7 @@
 #include <lib.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 
 PUBLIC void setkey(unsigned int k0, unsigned int k1)
 {
@@ -9,4 +11,8 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     int retvalue;
     retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
     printf("Return value: %d\n",retvalue);
+    if(retvalue < 0){
+        printf("Error!!\n");
+        printf("Error with syscall: %s\n", strerror( errno ));
+    }
 }
