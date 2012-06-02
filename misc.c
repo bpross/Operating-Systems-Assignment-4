@@ -4,7 +4,7 @@
 #include <minix/bdev.h>
 #include "inode.h"
 #include "clean.h"
-
+#include <lib.h>
 /*===========================================================================*
  *				fs_sync					     *
  *===========================================================================*/
@@ -84,7 +84,7 @@ PUBLIC int fs_new_driver(void)
   return(OK);
 }
 
-PUBLIC int do_setkey()
+int do_setkey()
 {
     
     int k0 = m.in.m1_i1;
