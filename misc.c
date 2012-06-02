@@ -1,10 +1,10 @@
+#include <lib.h>
 #include "fs.h"
 #include <assert.h>
 #include <minix/vfsif.h>
 #include <minix/bdev.h>
 #include "inode.h"
 #include "clean.h"
-#include <lib.h>
 /*===========================================================================*
  *				fs_sync					     *
  *===========================================================================*/
