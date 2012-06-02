@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <lib.h>
 
 void do_setkey()
 {
