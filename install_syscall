@@ -1,0 +1,12 @@
+cp ./callnr.h /usr/src/include/minix/callnr.h
+cp ./table.c /usr/src/servers/mfs/table.c
+cp ./proto.h /usr/src/servers/mfs/proto.h
+cp ./encrypt.c /usr/src/servers/mfs/encrypt.c
+cp ./Makefile /usr/src/servers/mfs/Makefile
+cp ./_encrypt.h /usr/include/_semaphore.h
+
+cd /usr/src/
+make libraries
+cd /usr/src/tools/
+make hdboot
+reboot
