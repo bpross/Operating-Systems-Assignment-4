@@ -86,8 +86,8 @@ PUBLIC int fs_new_driver(void)
 int do_setkey()
 {
     
-    int k0 = fs_m.in.m1_i1;
-    int k1 = fs_m.in.m1_i2;
+    int k0 = fs_m_in.m1_i1;
+    int k1 = fs_m_in.m1_i2;
 
     printf("K0: %d\nK1: %d\n",k0,k1);
     return(OK);
