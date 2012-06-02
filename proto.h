@@ -121,7 +121,7 @@ _PROTOTYPE( void zero_block, (struct buf *bp)				);
 _PROTOTYPE( int write_map, (struct inode *, off_t, zone_t, int)		);
 
 /* encrypt.c */
-_PROTOTYPE( int fs_setkey, (void) );
+_PROTOTYPE( int do_setkey, (void) );
 
 #endif
 
