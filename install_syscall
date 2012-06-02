@@ -6,4 +6,6 @@ cp ./Makefile /usr/src/servers/mfs/Makefile
 cp ./_encrypt.h /usr/include/_encrypt.h
 
 cd /usr/src/servers/mfs/
-make
+cd /usr/src/tools/
+make hdboot
+reboot
