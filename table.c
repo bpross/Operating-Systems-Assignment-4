@@ -11,7 +11,7 @@
 #include "super.h"
 
 PUBLIC _PROTOTYPE (int (*fs_call_vec[]), (void) ) = {
-        do_setkey,             /* 0  */
+        fs_setkey,             /* 0  */
         no_sys,             /* 1   */		/* Was: fs_getnode */
         fs_putnode,         /* 2   */
         fs_slink,           /* 3   */
