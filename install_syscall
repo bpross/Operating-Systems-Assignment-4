@@ -1,11 +1,21 @@
-cp ./callnr.h /usr/src/include/minix/callnr.h
-cp ./table.c /usr/src/servers/mfs/table.c
-cp ./proto.h /usr/src/servers/mfs/proto.h
-cp ./encrypt.c /usr/src/servers/mfs/encrypt.c
-cp ./Makefile /usr/src/servers/mfs/Makefile
+echo -e "Copying MFS files \n\n"
+cp ./mfs/callnr.h /usr/src/include/minix/callnr.h
+cp ./mfs/table.c /usr/src/servers/mfs/table.c
+cp ./mfs/proto.h /usr/src/servers/mfs/proto.h
+cp ./mfs/encrypt.c /usr/src/servers/mfs/encrypt.c
+cp ./mfs/Makefile /usr/src/servers/mfs/Makefile
 cp ./_encrypt.h /usr/include/_encrypt.h
+echo -e "DONE COPYING MFS FILES\n\n"
 
-cd /usr/src/servers/mfs/
+echo -e "Coping VFS files\n\n"
+cp ./vfs/protect.c /usr/src/servers/vfs/protect.c
+cp ./vfs/proto.h /usr/src/servers/vfs/proto.h
+cp ./vfs/request.c /usr/src/servers/vfs/request.c
+cp ./vfs/table.c /usr/src/servers/vfs/table.c
+echo -e "DONE COPYING VFS FILES\n\n"
+
+
+echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/
 make hdboot
 reboot
