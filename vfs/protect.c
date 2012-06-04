@@ -21,7 +21,9 @@
 
 PUBLIC int do_setkey()
 {
-    printf("Sucessfull call to syscall in VFS\n");
+    int k0 = m.m1_i1;
+    int k1 = m.m1_i2;
+    printf("Sucessfull call to syscall in VFS\nK0: %d\nK1: %d\n",k0,k1);
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
