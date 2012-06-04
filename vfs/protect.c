@@ -34,8 +34,6 @@ PUBLIC int do_setkey()
 
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
     if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
-    if (fetch_name(m_in.m1_p1, m_in.m1_i3, M3, fullpath) != OK)
-		return(err_code);
     r = req_setkey(vp->v_fs_e,k0,k1);
 
     return(r);
