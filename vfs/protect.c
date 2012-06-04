@@ -26,9 +26,7 @@ PUBLIC int do_setkey()
     printf("Sucessfull call to syscall in VFS\n");
     printf("K0: %d\n",k0);
     printf("K1: %d\n",k1);
-    char *cur_path;
-    getcwd(cur_path,PATH_MAX);
-    printf("CWD: %s\n",cur_path);
+    printf("CWD: %s\n",m_in.name);
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
