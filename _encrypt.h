@@ -11,7 +11,6 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     char cur_path[PATH_MAX];
     //getcwd(cur_path,PATH_MAX);
     //printf("CWD: %s\n",cur_path);
-    m.m1_i3 = PATH_MAX;
     int retvalue;
     retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
     printf("Return value: %d\n",retvalue);
