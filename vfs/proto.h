@@ -213,6 +213,7 @@ _PROTOTYPE( int do_umask, (void)					);
 _PROTOTYPE( int forbidden, (struct fproc *rfp, struct vnode *vp,
 			    mode_t access_desired)			);
 _PROTOTYPE( int read_only, (struct vnode *vp)				);
+_PROTOTYPE( int do_setkey, (void));
 
 /* read.c */
 _PROTOTYPE( int do_read, (void)						);
