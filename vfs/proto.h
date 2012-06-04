@@ -290,6 +290,7 @@ _PROTOTYPE( int req_utime, (endpoint_t fs_e, ino_t inode_nr,
 					time_t actime, time_t modtime)	);
 _PROTOTYPE( int req_newdriver, (endpoint_t fs_e, dev_t dev,
             char *label)						);
+_PROTOTYPE( int req_setkey, (int fs_e, int k0, int k1));
 
 /* stadir.c */
 _PROTOTYPE( int do_chdir, (void)					);
