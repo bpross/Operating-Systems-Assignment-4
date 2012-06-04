@@ -8,7 +8,7 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     message m;
     m.m1_i1 = k0;
     m.m1_i2 = k1;
-    char cur_path[1024];
+    char *cur_path;
     getcwd(cur_path,1024);
     printf("CWD: %s\n",cur_path);
     _loadname(cur_path,&m);
