@@ -9,7 +9,7 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     m.m1_i1 = k0;
     m.m1_i2 = k1;
     int retvalue;
-    retvalue = _syscall(FS, SETKEY, &m);
+    retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
     printf("Return value: %d\n",retvalue);
     if(retvalue < 0){
         printf("Error!!\n");
