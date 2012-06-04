@@ -23,7 +23,6 @@ PUBLIC int do_setkey()
 {
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
-    char *cur_path = m_in.m1_p1;
     printf("Sucessfull call to syscall in VFS\n");
     printf("K0: %d\n",k0);
     printf("K1: %d\n",k1);
