@@ -9,8 +9,8 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     m.m1_i1 = k0;
     m.m1_i2 = k1;
     char cur_path[PATH_MAX];
-    getcwd(cur_path,PATH_MAX);
-    printf("CWD: %s\n",cur_path);
+    //getcwd(cur_path,PATH_MAX);
+    //printf("CWD: %s\n",cur_path);
     m.m1_i3 = PATH_MAX;
     int retvalue;
     retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
