@@ -97,6 +97,17 @@ PUBLIC int req_chmod(
   return(r);
 }
 
+PUBLIC int req_setkey( int fs_e, int k0, int k1)
+{
+    message m;
+    int r;
+    m.m1_i1 = k0;
+    m.m1_i2 = k1;
+
+    r = fs_sendrec(fs_e, &m);
+
+    return(r);
+}
 
 /*===========================================================================*
  *				req_chown          			     *

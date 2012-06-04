@@ -30,10 +30,12 @@ PUBLIC int do_setkey()
     struct vnode *vp;
     struct vmnt *vmp;
     char fullpath[PATH_MAX];
+    int r;
 
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
+    r = req_setkey(vp->v_fs_e,k0,k1);
 
-    return(OK);
+    return(r);
 }
 /*===========================================================================*
  *				do_chmod				     *
