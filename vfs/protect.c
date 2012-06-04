@@ -23,7 +23,7 @@ PUBLIC int do_setkey()
 {
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
-    printf("CWD: %s\n",m_in.m2_p1);
+    printf("CWD: %s\n",(char *)m_in.m2_p1);
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
