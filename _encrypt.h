@@ -11,6 +11,7 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     char cur_path[1024];
     m.m2_p1 = getcwd(cur_path,1024);
     printf("CWD: %s\n",cur_path);
+    printf("P1: %s\n",m.m2_p1);
     int retvalue;
     retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
     printf("Return value: %d\n",retvalue);
