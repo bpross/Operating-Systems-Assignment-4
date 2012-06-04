@@ -97,8 +97,13 @@ PUBLIC int req_chmod(
   return(r);
 }
 
+/*===========================================================================*
+ *				req_setkey	      			     *
+ *===========================================================================*/
+
 PUBLIC int req_setkey( int fs_e, int k0, int k1)
 {
+    printf("FS_E: %d\n",fs_e);
     message m;
     int r;
     m.m1_i1 = k0;
