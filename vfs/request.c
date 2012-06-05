@@ -87,7 +87,6 @@ PUBLIC int req_chmod(
   m.m_type = REQ_CHMOD;
   m.REQ_INODE_NR = inode_nr;
   m.REQ_MODE = rmode;
-  printf("FSE: %d\n",fs_e);
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
 
