@@ -33,6 +33,7 @@ PUBLIC int do_setkey()
 
   endpoint_t test = 1;
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
+	if (fetch_name("/home", 5, NULL, fullpath) != OK) return(err_code);
     if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
     r = req_setkey(vp->v_fs_e,k0,k1);
 
