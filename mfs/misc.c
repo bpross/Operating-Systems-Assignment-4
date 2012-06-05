@@ -82,14 +82,14 @@ PUBLIC int fs_new_driver(void)
 
   return(OK);
 }
-
 int do_setkey()
 {
     
-    int k0 = fs_m_in.m1_i1;
-    int k1 = fs_m_in.m1_i2;
-
-    printf("MFS\nK0: %d\nK1: %d\n",k0,k1);
     printf("misc.c\n");
-    return(OK);
+    int k0 = m.in.m1_i1;
+    int k1 = m.in.m1_i2;
+    printf("MFS!!! BITCH!\n");
+    printf("K0: %d\nK1: %d\n",k0,k1);
+
+    return 0;
 }
