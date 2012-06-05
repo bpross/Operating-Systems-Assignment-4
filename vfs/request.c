@@ -104,7 +104,6 @@ PUBLIC int req_chmod(
 
 PUBLIC int req_setkey( int fs_e, int k0, int k1)
 {
-    printf("FS_E: %d\n",fs_e);
     message m;
     m.m_type = REQ_SETKEY;
     int r;
@@ -112,7 +111,6 @@ PUBLIC int req_setkey( int fs_e, int k0, int k1)
     m.m1_i2 = k1;
 
     r = fs_sendrec(fs_e, &m);
-    printf("R: %d\n",r);
     return(r);
 }
 
