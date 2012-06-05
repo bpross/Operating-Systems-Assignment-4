@@ -28,12 +28,12 @@ PUBLIC int do_setkey()
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
-    char fullpath[PATH_MAX];
+    char fullpath[PATH_MAX] = "/home";
     int r;
 
   endpoint_t test = 1;
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
-    //if ((vp = eat_path(&resolve, cwd)) == NULL) return(err_code);
+    if ((vp = eat_path(&resolve, cwd)) == NULL) return(err_code);
     r = req_setkey(test,k0,k1);
 
     return(r);
