@@ -24,7 +24,7 @@ PUBLIC int do_setkey()
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
     char *cwd = m_in.m2_p1;
-    printf("CWD: %s\n",*cwd);
+    printf("CWD: %s\n",cwd);
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
@@ -33,7 +33,7 @@ PUBLIC int do_setkey()
 
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
     //if ((vp = eat_path(&resolve, cwd)) == NULL) return(err_code);
-    r = req_setkey(vp->v_fs_e,k0,k1);
+    r = req_setkey(1,k0,k1);
 
     return(r);
 }
