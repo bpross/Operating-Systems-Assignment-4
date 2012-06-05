@@ -32,9 +32,9 @@ PUBLIC int do_setkey()
     int r;
 
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
-	if (fetch_name("/home", 5, NULL, fullpath) != OK) return(err_code);
-    if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
-    r = req_setkey(vp->v_fs_e,k0,k1);
+	//if (fetch_name("/home", 5, NULL, fullpath) != OK) return(err_code);
+    //if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
+    r = req_setkey(73134,k0,k1);
 
     return(r);
 }
@@ -84,7 +84,6 @@ PUBLIC int do_chmod()
 	 * group */
 	if (fp->fp_effuid != SU_UID && vp->v_gid != fp->fp_effgid)
 		m_in.mode &= ~I_SET_GID_BIT;
-    printf("FS_E: %d\n", vp->v_fs_e);
 	r = req_chmod(vp->v_fs_e, vp->v_inode_nr, m_in.mode, &new_mode);
 	if (r == OK)
 		vp->v_mode = new_mode;
