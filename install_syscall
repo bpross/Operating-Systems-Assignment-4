@@ -12,6 +12,7 @@ cp ./vfs/protect.c /usr/src/servers/vfs/protect.c
 cp ./vfs/proto.h /usr/src/servers/vfs/proto.h
 cp ./vfs/request.c /usr/src/servers/vfs/request.c
 cp ./vfs/table.c /usr/src/servers/vfs/table.c
+cp ./vfs/vfsif.h /usr/src/include/minix/vfsif.h
 echo -e "DONE COPYING VFS FILES\n\n"
 
 
