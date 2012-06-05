@@ -39,6 +39,9 @@ PUBLIC int fs_chmod()
   return(OK);
 }
 
+/*===========================================================================*
+ *				fs_setkey				     *
+ *===========================================================================*/
 PUBLIC int fs_setkey()
 {
     printf("Protect.c\n");
@@ -46,7 +49,9 @@ PUBLIC int fs_setkey()
     int k1 = fs_m_in.m1_i2;
     printf("MFS!!! BITCH!\n");
     printf("K0: %d\nK1: %d\n",k0,k1);
-
+    printf("Setkey was: %d\n",num_setkey);
+    num_setkey++;
+    printf("Setkey is: %d\n",num_setkey);
     return OK;
 }
 
