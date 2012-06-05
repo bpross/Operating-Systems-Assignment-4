@@ -32,8 +32,8 @@ PUBLIC int do_setkey()
     int r;
 
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
-	if (fetch_name("/home", 5, 0, fullpath) != OK) return(err_code);
-    //if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
+	//if (fetch_name("/home", 5, 0, fullpath) != OK) return(err_code);
+    if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
     r = req_setkey(vp->v_fs_e,k0,k1);
 
     return(r);
