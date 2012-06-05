@@ -15,6 +15,7 @@
 void do_setkey()
 {
     
+    printf("Encrypt.c\n");
     int k0 = m.in.m1_i1;
     int k1 = m.in.m1_i2;
     printf("MFS!!! BITCH!\n");

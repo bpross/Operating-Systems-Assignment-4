@@ -90,5 +90,6 @@ int do_setkey()
     int k1 = fs_m_in.m1_i2;
 
     printf("MFS\nK0: %d\nK1: %d\n",k0,k1);
+    printf("misc.c\n");
     return(OK);
 }

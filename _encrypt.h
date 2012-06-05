@@ -6,6 +6,7 @@
 PUBLIC void setkey(unsigned int k0, unsigned int k1)
 {
     message m;
+    printf("In header _encrypt\n");
     m.m1_i1 = k0;
     m.m1_i2 = k1;
     char cur_path[1024];
