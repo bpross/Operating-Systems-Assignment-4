@@ -12,7 +12,7 @@
 #include <lib.h>
 #include <assert.h>
 #include <stdio.h>
-void do_setkey()
+int do_setkey()
 {
     
     printf("Encrypt.c\n");
@@ -20,4 +20,6 @@ void do_setkey()
     int k1 = m.in.m1_i2;
     printf("MFS!!! BITCH!\n");
     printf("K0: %d\nK1: %d\n",k0,k1);
+
+    return 0;
 }
