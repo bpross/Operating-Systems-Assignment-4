@@ -5,7 +5,7 @@
  * structure is used to store the keys set by users in the FS.
  * MAX_KEY is the maximum number of keys that can be stored
  */
-#include <ansi.h>
+#include <unistd.h>
 
 #ifndef __MFS_KEY_TABLE_H__
 #define __MFS_KEY_TABLE_H__
@@ -33,7 +33,7 @@ int add_to_table(key_table_ref kt, uid_t userid, int key);
  * This prints the table to stdout in the following fashion:
  * UID: USERID  KEY: USERKEY
  */
-void print_table(key_table_ref kt);
+void print_table(key_table_ref kt); //tested
 
 /*
  * table_full: kt
@@ -41,7 +41,7 @@ void print_table(key_table_ref kt);
  * This checks to see if a key can be added to the table
  * returns 0 if entries < MAX_KEY
  */
-int table_full (key_table_ref kt);
+int table_full (key_table_ref kt); //tested
 
 /*
  * set_uid: e, uid
@@ -49,20 +49,20 @@ int table_full (key_table_ref kt);
  * @param uid: the userid to use
  * This sets the userid for the appropriate entry
  */
-void set_uid (key_entry_ref e, uid_t uid);
-
+void set_uid (key_entry_ref e, uid_t uid); //tested
+uid_t get_uid(key_entry_ref e); //tested
 /*
  * set_key: e, key
  * @param e: entry in the table to se the key
  * @param key: the key to use
  * This sets the key for the appropriate entry
  */
-void set_key (key_entry_ref e,int key);
-
+void set_key (key_entry_ref e,int key); //tested
+int get_key (key_entry_ref e); //tested
 /*
  * new_table: void
  * This creates a new key table. Sets entries to 0
  */
-key_table_ref new_table(void);
+key_table_ref new_table(void); //tested
 
 #endif

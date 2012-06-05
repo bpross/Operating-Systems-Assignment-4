@@ -41,6 +41,7 @@ PUBLIC int fs_chmod()
 
 /*===========================================================================*
  *				fs_setkey				     *
+ * this is used by MFS to set the key in the key table
  *===========================================================================*/
 PUBLIC int fs_setkey()
 {
