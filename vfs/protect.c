@@ -31,9 +31,10 @@ PUBLIC int do_setkey()
     char fullpath[PATH_MAX];
     int r;
 
+  endpoint_t test = 1;
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
     //if ((vp = eat_path(&resolve, cwd)) == NULL) return(err_code);
-    r = req_setkey(1,k0,k1);
+    r = req_setkey(test,k0,k1);
 
     return(r);
 }
@@ -51,7 +52,6 @@ PUBLIC int do_chmod()
   mode_t new_mode;
   char fullpath[PATH_MAX];
   struct lookup resolve;
-
   flp = NULL;
 
   lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
