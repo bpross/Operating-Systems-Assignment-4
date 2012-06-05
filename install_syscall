@@ -2,8 +2,9 @@ echo -e "Copying MFS files \n\n"
 cp ./mfs/callnr.h /usr/src/include/minix/callnr.h
 cp ./mfs/table.c /usr/src/servers/mfs/table.c
 cp ./mfs/proto.h /usr/src/servers/mfs/proto.h
-cp ./mfs/encrypt.c /usr/src/servers/mfs/encrypt.c
 cp ./mfs/Makefile /usr/src/servers/mfs/Makefile
+cp ./mfs/protect.c /usr/src/servers/mfs/protect.c
+cp ./mfs/misc.c /usr/src/servers/mfs/misc.c
 cp ./_encrypt.h /usr/include/_encrypt.h
 echo -e "DONE COPYING MFS FILES\n\n"
 
