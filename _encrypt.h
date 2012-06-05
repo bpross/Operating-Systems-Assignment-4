@@ -1,3 +1,13 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ * The purpose of this file is to provide a system call that
+ * allows the user to set their encryption key in the FS.
+ * This key will be used to en/decrypt files in the read()
+ * write() system calls, only if the sticky bit is set.
+ *
+ * Usage: setkey(k0,k1)
+ */
 #include <lib.h>
 #include <unistd.h>
 #include <errno.h>
@@ -5,18 +15,15 @@
 
 PUBLIC void setkey(unsigned int k0, unsigned int k1)
 {
+    /*Setup the variables to be passed to the FS */
     message m;
-    printf("In header _encrypt\n");
     m.m1_i1 = k0;
     m.m1_i2 = k1;
-    char cur_path[1024];
-    getcwd(cur_path,1024);
-    m.m2_p1 = *cur_path;
+
+    /* Get the return value of the syscall and check for errors */
     int retvalue;
     retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
-    printf("Return value: %d\n",retvalue);
     if(retvalue < 0){
-        printf("Error!!\n");
-        printf("Error with syscall: %s\n", strerror( errno ));
+        printf("Error with syscall setkey: %s\n", strerror( errno ));
     }
 }

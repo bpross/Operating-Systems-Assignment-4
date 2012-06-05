@@ -1,5 +1,8 @@
 /*This is work done for CMPS111 Spring 2012
- * This work was done by bpross, apoit, and qsun
+ * This work was done by Benjamin Ross, Quentin Rivers and Matthew Musselamn
+ * The purpose of this file is to test the implementation of the setkey
+ * systemcall. It follows the test cases outlined in Section 4 of 
+ * design.pdf
  */
 
 
@@ -13,7 +16,6 @@ int main()
     int ret_value;
 
     setkey(k0,k1);
-    printf("Return Value on SetKey: %d\n", ret_value);
 
     return 0;
 }
