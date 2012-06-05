@@ -24,14 +24,13 @@ PUBLIC int do_setkey()
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
     char *cwd = m_in.m2_p1;
-    printf("CWD: %s\n",cwd);
+    printf("CWD: %s\n",&cwd);
     struct lookup resolve;
     struct vnode *vp;
     struct vmnt *vmp;
     char fullpath[PATH_MAX];
     int r;
 
-  endpoint_t test = 1;
     lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
 	//if (fetch_name("/home", 5, NULL, fullpath) != OK) return(err_code);
     //if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
