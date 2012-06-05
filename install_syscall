@@ -5,6 +5,8 @@ cp ./mfs/proto.h /usr/src/servers/mfs/proto.h
 cp ./mfs/Makefile /usr/src/servers/mfs/Makefile
 cp ./mfs/protect.c /usr/src/servers/mfs/protect.c
 cp ./mfs/misc.c /usr/src/servers/mfs/misc.c
+cp ./mfs/main.c /usr/src/servers/mfs/main.c
+cp ./mfs/glo.h /usr/src/servers/mfs/glo.h
 cp ./_encrypt.h /usr/include/_encrypt.h
 echo -e "DONE COPYING MFS FILES\n\n"
 
