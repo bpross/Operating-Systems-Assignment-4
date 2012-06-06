@@ -77,6 +77,13 @@ int get_key (key_entry_ref e); //tested
 key_table_ref new_table(void); //tested
 
 /*
+ * free_table: kt
+ * @param kt: table to be freed
+ * This frees the table
+ */
+void free_table(key_table_ref kt);
+
+/*
  * get_key_by_uid: kt, id
  * @param kt: key table to look at
  * @param id: ID to get key for

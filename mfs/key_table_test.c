@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "mfs/key_table.h"
-
+#include "key_table.h"
 int main(int argc, char**argv){
 	
 	
@@ -18,8 +17,6 @@ int main(int argc, char**argv){
     int key = 1337;
     set_key(e,key);
     printf("Verification: Key: %d\t Entry Key: %d\n",key,get_key(e));
-
-    free(e); //we are no longer going to use this
 
     printf("Testing new_table\n");
     key_table_ref kt = new_table();
@@ -80,10 +77,6 @@ int main(int argc, char**argv){
     // This one should NOT work
     test_key = get_key_by_uid(kt,1);
     printf("Key for user %d: %d\n",cur_uid,test_key);
-
-    // Testing free
-    printf("Testing free table\n");
-    free_table(kt);
 	return 0;
 }
 

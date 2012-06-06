@@ -35,16 +35,31 @@ key_table_ref new_table(void)
     return(kt);
 }
 
+/* free_table */
+void free_table(key_table_ref kt)
+{
+    int i;
+    for(i=0;i<kt->entries;i++)
+    {
+        free(kt->keys[i]);
+    }
+    free(kt->keys);
+    free(kt);
+}
+
 /* set_uid */
 key_entry_ref set_uid (key_entry_ref e, uid_t uid)
 {
     e->userid = uid;
     return e;
 }
+
+/* get_uid */
 uid_t get_uid(key_entry_ref e)
 {
     return e->userid;
 }
+
 /* set_key */
 key_entry_ref set_key (key_entry_ref e, int key)
 {
@@ -52,10 +67,12 @@ key_entry_ref set_key (key_entry_ref e, int key)
     return e;
 }
 
+/* get_key */
 int get_key(key_entry_ref e)
 {
     return e->key;
 }
+
 /* table_full */
 int table_full (key_table_ref kt)
 {
