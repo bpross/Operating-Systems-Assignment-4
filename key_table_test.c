@@ -34,7 +34,7 @@ int main(int argc, char**argv){
     printf("Testing add_to_table\n");
     int check = add_to_table(kt,cur_uid,key);
     printf("Check: %d\n",check);
-
+    print_table(kt);
     // Going to fill up the table
     printf("Testing add_to_table\n");
     check = add_to_table(kt,cur_uid+1,key+1);

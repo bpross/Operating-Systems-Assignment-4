@@ -100,11 +100,8 @@ int add_to_table(key_table_ref kt, uid_t userid, int key)
         return -1;
     else 
     {
-        printf("Index: %d\n",kt->entries);
-        printf("Pointer %p\n",kt->keys[kt->entries]);
         kt->keys[kt->entries] = set_uid(kt->keys[kt->entries],userid);
         kt->keys[kt->entries] = set_key(kt->keys[kt->entries],key);
-        printf("Pointer %p\n",kt->keys[kt->entries]);
         kt->entries++;
         return 1;
     }
