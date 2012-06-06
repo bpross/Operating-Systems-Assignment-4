@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-//#include "fs.h"
+#include "fs.h"
 #include "key_table.h"
 
 /* Struct Definitions */
