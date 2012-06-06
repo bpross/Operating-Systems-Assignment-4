@@ -7,6 +7,7 @@ testtable:
 	gcc -o test key_table_test.c mfs/key_table.c mfs/key_table.h
     
 testprot:
+    - rm protectfile.o
 	gcc ${GCCOPT} -c protectfile.c rijndael.c
 	gcc ${GCCOPT} -o protectfile protectfile.o rijndael.o
-	./protectfile e 1ac4 test1
+	./protectfile d 1bc4 test1
