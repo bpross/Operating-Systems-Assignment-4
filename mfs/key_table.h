@@ -25,7 +25,7 @@ typedef struct key_entry *key_entry_ref;
  * (this will be added if we have time, but the spec does
  * not call for this)
  */
-int add_to_table(key_table_ref kt, uid_t userid, int key);
+int add_to_table(key_table_ref kt, uid_t userid, int key); //tested
 
 /*
  * print_table: kt
@@ -49,7 +49,12 @@ int table_full (key_table_ref kt); //tested
  * @param uid: the userid to use
  * This sets the userid for the appropriate entry
  */
-void set_uid (key_entry_ref e, uid_t uid); //tested
+key_entry_ref set_uid (key_entry_ref e, uid_t uid); //tested
+/*
+ * get_uid: e
+ * @param e: entry in the table to set the userid
+ * This gets the userid for the appropriate entry
+ */
 uid_t get_uid(key_entry_ref e); //tested
 /*
  * set_key: e, key
@@ -57,7 +62,13 @@ uid_t get_uid(key_entry_ref e); //tested
  * @param key: the key to use
  * This sets the key for the appropriate entry
  */
-void set_key (key_entry_ref e,int key); //tested
+key_entry_ref set_key (key_entry_ref e,int key); //tested
+
+/*
+ * get_key: e, key
+ * @param e: entry in the table to se the key
+ * This gets the key for the appropriate entry
+ */
 int get_key (key_entry_ref e); //tested
 /*
  * new_table: void
@@ -65,4 +76,12 @@ int get_key (key_entry_ref e); //tested
  */
 key_table_ref new_table(void); //tested
 
+/*
+ * get_key_by_uid: kt, id
+ * @param kt: key table to look at
+ * @param id: ID to get key for
+ * Returns -1 if no key found
+ * This grabs the key for the id passed
+ */
+int get_key_by_uid(key_table_ref kt, uid_t id);
 #endif

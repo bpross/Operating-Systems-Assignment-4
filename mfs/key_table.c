@@ -29,22 +29,27 @@ key_table_ref new_table(void)
     kt = calloc(1, sizeof(key_table_ref));
     kt->entries = 0;
     kt->keys = calloc(MAX_KEY, sizeof(key_entry_ref));
+    int i;
+    for(i=0;i<MAX_KEY;i++)
+        kt->keys[i] = malloc(sizeof(key_entry_ref));
     return(kt);
 }
 
 /* set_uid */
-void set_uid (key_entry_ref e, uid_t uid)
+key_entry_ref set_uid (key_entry_ref e, uid_t uid)
 {
     e->userid = uid;
+    return e;
 }
 uid_t get_uid(key_entry_ref e)
 {
     return e->userid;
 }
 /* set_key */
-void set_key (key_entry_ref e, int key)
+key_entry_ref set_key (key_entry_ref e, int key)
 {
     e->key = key;
+    return e;
 }
 
 int get_key(key_entry_ref e)
@@ -64,14 +69,10 @@ int table_full (key_table_ref kt)
 void print_table (key_table_ref kt)
 {
     int i;
-    key_entry_ref temp = kt->keys[0];
     for(i=0;i<kt->entries;++i)
     {
-        if (kt->keys[i] != NULL)
-            printf("uid: %d\tkey: %d\n",kt->keys[i]->userid,kt->keys[i]->key);
-        kt->keys++; 
+        printf("%d:\tuid: %d\tkey: %d\n",i,kt->keys[i]->userid,kt->keys[i]->key);
     }
-    kt->keys[0] = temp;
 }
 
 /* add_to_table */
@@ -82,15 +83,24 @@ int add_to_table(key_table_ref kt, uid_t userid, int key)
         return -1;
     else 
     {
-        key_table_ref temp = kt;
-        int i;
-        for(i=0;i<kt->entries;++i);
-        printf("i: %d\n",i);
-        if(kt->keys[i] == NULL)
-            kt->keys[i] = malloc(sizeof(key_entry_ref));
-        set_uid(kt->keys[i],userid);
-        set_key(kt->keys[i],key);
+        printf("Index: %d\n",kt->entries);
+        printf("Pointer %p\n",kt->keys[kt->entries]);
+        kt->keys[kt->entries] = set_uid(kt->keys[kt->entries],userid);
+        kt->keys[kt->entries] = set_key(kt->keys[kt->entries],key);
+        printf("Pointer %p\n",kt->keys[kt->entries]);
         kt->entries++;
         return 1;
     }
+}
+
+int get_key_by_uid(key_table_ref kt, uid_t id)
+{
+    int i;
+    for(i = 0;i<kt->entries;i++)
+    {
+        if(get_uid(kt->keys[i]) == id)
+            return get_key(kt->keys[i]);
+    }
+    //not found
+    return -1;
 }
