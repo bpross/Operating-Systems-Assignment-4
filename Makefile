@@ -1,4 +1,4 @@
-GCCOPT    = -Wall -Wextra
+GCCOPT     = -Wall -Wextra
 
 testsyscall:
 	gcc -o test syscall_test.c
@@ -6,7 +6,7 @@ testsyscall:
 testtable:
 	gcc -o test key_table_test.c mfs/key_table.c mfs/key_table.h
     
-testprotect:
+testprot:
 	gcc ${GCCOPT} -c protectfile.c rijndael.c
 	gcc ${GCCOPT} -o protectfile protectfile.o rijndael.o
-	./protectfile
+	./protectfile e 1ac4 test1
