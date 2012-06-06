@@ -1,3 +1,5 @@
+#include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,6 +45,83 @@ int hexvalue (char c)
 void usage_exit(char* progname) {
     fprintf(stderr, "Usage: %s [mode] [key] [filename]\n", progname);
     exit (EXIT_FAILURE);
+}
+
+void encrypt_file(char* filename, ino_t file_nr, u8* key) {
+  /* The following code has been adopted from encrypt.c, its variable names
+   * have been modified to fit the rest of the code.
+   */
+  unsigned long rk[RKLENGTH(KEYBITS)];
+  int fd;
+  int ctr;
+  unsigned char filedata[16];
+  unsigned char ciphertext[16];
+  unsigned char ctrvalue[16];
+  int i, nrounds, totalbytes, nbytes, nwritten;
+  
+  /*
+   * Initialize the Rijndael algorithm.  The round key is initialized by this
+   * call from the values passed in key and KEYBITS.
+   */
+  nrounds = rijndaelSetupEncrypt(rk, key, KEYBITS);
+    
+  /*
+   * Open the file.
+   */
+  fd = open(filename, O_RDWR);
+  if (fd < 0)
+  {
+    fprintf(stderr, "Error opening file %s\n", filename);
+    exit(EXIT_FAILURE);
+  }
+
+  /* fileID goes into bytes 8-11 of the ctrvalue */
+  bcopy (&file_nr, &(ctrvalue[8]), sizeof (file_nr));
+
+  /* This loop reads 16 bytes from the file, XORs it with the encrypted
+     CTR value, and then writes it back to the file at the same position.
+     Note that CTR encryption is nice because the same algorithm does
+     encryption and decryption.  In other words, if you run this program
+     twice, it will first encrypt and then decrypt the file.
+  */
+  for (ctr = 0, totalbytes = 0; /* loop forever */; ctr++)
+  {
+    /* Read 16 bytes (128 bits, the blocksize) from the file */
+    nbytes = read (fd, filedata, sizeof (filedata));
+    if (nbytes <= 0) {
+      break;
+    }
+    if (lseek (fd, totalbytes, SEEK_SET) < 0)
+    {
+      perror ("Unable to seek back over buffer");
+      exit (-1);
+    }
+
+    /* Set up the CTR value to be encrypted */
+    bcopy (&ctr, &(ctrvalue[0]), sizeof (ctr));
+
+    /* Call the encryption routine to encrypt the CTR value */
+    rijndaelEncrypt(rk, nrounds, ctrvalue, ciphertext);
+
+    /* XOR the result into the file data */
+    for (i = 0; i < nbytes; i++) {
+      filedata[i] ^= ciphertext[i];
+    }
+
+    /* Write the result back to the file */
+    nwritten = write(fd, filedata, nbytes);
+    if (nwritten != nbytes)
+    {
+      fprintf (stderr,
+	       "error writing the file (expected %d, got %d at ctr %d\n)",
+	       nbytes, nwritten, ctr);
+      break;
+    }
+
+    /* Increment the total bytes written */
+    totalbytes += nbytes;
+  }
+  close (fd);
 }
 
 /* get_full_key
@@ -133,6 +212,7 @@ int main(int argc, char** argv) {
     ino_t file_nr = file_info.st_ino;
     int file_mode = file_info.st_mode;
     int is_sticky = file_mode & S_ISVTX;
+    fprintf(stderr, "%x\n", is_sticky);
     
     /* Check if the file has already been en/decrypted */
     if ((!is_sticky) && mode == 'd') {
@@ -149,11 +229,39 @@ int main(int argc, char** argv) {
     get_full_key(input_key, file_nr, key);
     
     /* DEBUG */
+    fprintf(stderr, "File: %s, Filenr: %x\nKey: %s\n", filename, file_nr, input_key);
     char buf[KEYLENGTH(KEYBITS) * 2];
     for(i = 0; i < KEYLENGTH(KEYBITS); i++) {
         sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
     }
     fprintf(stderr, "KEY: %s\n", buf);
     
-    /*** CODE UNFINISHED ***/
+    /* Clear the sticky bit before any encryption/decryption happens */
+    fprintf(stderr, "clear %s: %05x", filename, file_info.st_mode);
+    file_info.st_mode = file_info.st_mode & (~S_ISVTX);
+    error = chmod(filename, file_info.st_mode);
+    fprintf(stderr, ", %05x\n", file_info.st_mode);
+    if(error != 0) {
+        fprintf(stderr, "Error accessing sticky bit.");
+        exit(EXIT_FAILURE);
+    }
+    
+    if (mode == 'e') {
+        encrypt_file(filename, file_nr, key);
+        
+        fprintf(stderr, "set %s: %05x", filename, file_info.st_mode);
+        file_info.st_mode = file_info.st_mode | S_ISVTX;
+        error = chmod(filename, file_info.st_mode);
+        fprintf(stderr, ", %05x\n", file_info.st_mode);
+        if(error != 0) {
+            fprintf(stderr, "Error accessing sticky bit.");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        encrypt_file(filename, file_nr, key);
+    }
+    
+    
+    
+    return EXIT_SUCCESS;
 }
