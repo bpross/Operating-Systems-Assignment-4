@@ -1,6 +1,7 @@
 #include "fs.h"
 #include "inode.h"
 #include "super.h"
+#include "key_table.h"
 #include <minix/vfsif.h>
 
 FORWARD _PROTOTYPE( int in_group, (gid_t grp)				);
@@ -45,14 +46,9 @@ PUBLIC int fs_chmod()
  *===========================================================================*/
 PUBLIC int fs_setkey()
 {
-    printf("Protect.c\n");
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
-    printf("MFS!!! BITCH!\n");
-    printf("K0: %d\nK1: %d\n",k0,k1);
-    printf("Setkey was: %d\n",num_setkey);
-    num_setkey++;
-    printf("Setkey is: %d\n",num_setkey);
+    printf("CALLER_UID: %d\n",caller_uid);
     return OK;
 }
 
