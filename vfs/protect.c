@@ -23,16 +23,9 @@ PUBLIC int do_setkey()
 {
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
-    struct lookup resolve;
-    struct vnode *vp;
-    struct vmnt *vmp;
-    char fullpath[PATH_MAX];
+    uid_t id = (uid_t)m_in.m2_i1;
     int r;
-    printf("Protect.c\n");
-    lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
-	//if (fetch_name("/home", 5, NULL, fullpath) != OK) return(err_code);
-    //if ((vp = eat_path(&resolve, fp)) == NULL) return(err_code);
-    r = req_setkey(73134,k0,k1);
+    r = req_setkey(73134,k0,k1,id);
 
     return(r);
 }

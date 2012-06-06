@@ -47,7 +47,8 @@ PUBLIC int fs_setkey()
 {
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
-    printf("CALLER_UID: %d\n",caller_uid);
+    uid_t id = (uid_t)fs_m_in.m2_i1;
+    printf("CALLER_UID: %d\n",id);
     return OK;
 }
 
