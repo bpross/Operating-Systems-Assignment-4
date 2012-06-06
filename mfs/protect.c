@@ -1,7 +1,6 @@
 #include "fs.h"
 #include "inode.h"
 #include "super.h"
-#include "key_table.h"
 #include <minix/vfsif.h>
 
 FORWARD _PROTOTYPE( int in_group, (gid_t grp)				);

@@ -9,7 +9,6 @@
 #include <minix/vfsif.h>
 #include "buf.h"
 #include "inode.h"
-#include "key_table.h"
 
 /* Declare some local functions. */
 FORWARD _PROTOTYPE(void get_work, (message *m_in)			);
@@ -30,7 +29,6 @@ PUBLIC int main(int argc, char *argv[])
  * sending the reply. The loop never terminates, unless a panic occurs.
  */
   int error = OK, ind, transid;
-  kt = new_table();
   /* SEF local startup. */
   env_setargs(argc, argv);
   sef_local_startup();
@@ -77,7 +75,6 @@ PUBLIC int main(int argc, char *argv[])
 	}
 	reply(src, &fs_m_out);
   }
-  free_table(kt);
   return(OK);
 }
 

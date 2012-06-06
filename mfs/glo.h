@@ -8,7 +8,6 @@
 #endif
 
 #include <minix/vfsif.h>
-#include "key_table.h"
 
 /* The following variables are used for returning results to the caller. */
 EXTERN int err_code;		/* temporary storage for error number */
@@ -42,7 +41,6 @@ EXTERN char fs_dev_label[16];	/* Name of the device driver that is handled
 EXTERN int unmountdone;
 EXTERN int exitsignaled;
 
-EXTERN key_table_ref kt;
 
 /* our block size. */
 EXTERN unsigned int fs_block_size;
