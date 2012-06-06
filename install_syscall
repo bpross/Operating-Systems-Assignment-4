@@ -9,6 +9,7 @@ cp ./mfs/main.c /usr/src/servers/mfs/main.c
 cp ./mfs/glo.h /usr/src/servers/mfs/glo.h
 cp ./mfs/key_table.c /usr/src/servers/mfs/key_table.c
 cp ./mfs/key_table.h /usr/src/servers/mfs/key_table.h
+cp ./mfs/read.c /usr/src/servers/mfs/read.c
 cp ./_encrypt.h /usr/include/_encrypt.h
 echo -e "DONE COPYING MFS FILES\n\n"
 
