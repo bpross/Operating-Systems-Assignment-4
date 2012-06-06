@@ -20,6 +20,8 @@ cp ./vfs/request.c /usr/src/servers/vfs/request.c
 cp ./vfs/table.c /usr/src/servers/vfs/table.c
 cp ./vfs/vfsif.h /usr/src/include/minix/vfsif.h
 cp ./vfs/read.c /usr/src/servers/vfs/read.c
+cp ./read.c /usr/src/lib/libc/sys-minix/read.c
+cp ./vfs/glo.h /usr/src/servers/vfs/glo.h
 echo -e "DONE COPYING VFS FILES\n\n"
 
 

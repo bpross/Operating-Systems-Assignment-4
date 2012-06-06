@@ -39,8 +39,7 @@ PUBLIC int req_breadwrite(
   char *user_addr,
   int rw_flag,
   u64_t *new_posp,
-  unsigned int *cum_iop,
-  uid_t id
+  unsigned int *cum_iop
 )
 {
   int r;
@@ -59,7 +58,7 @@ PUBLIC int req_breadwrite(
   m.REQ_SEEK_POS_LO = ex64lo(pos);
   m.REQ_SEEK_POS_HI = ex64hi(pos);
   m.REQ_NBYTES = num_of_bytes;
-  m.m3_i1 = id;
+  m.m3_i1 = caller_uid;
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
   cpf_revoke(grant_id);
@@ -768,7 +767,7 @@ PUBLIC int req_readsuper(
  *				req_readwrite				     *
  *===========================================================================*/
 PUBLIC int req_readwrite(fs_e, inode_nr, pos, rw_flag, user_e,
-	user_addr, num_of_bytes, new_posp, cum_iop, uid_t id)
+	user_addr, num_of_bytes, new_posp, cum_iop)
 endpoint_t fs_e;
 ino_t inode_nr;
 u64_t pos;
@@ -778,7 +777,6 @@ char *user_addr;
 unsigned int num_of_bytes;
 u64_t *new_posp;
 unsigned int *cum_iop;
-uid_t id;
 {
   int r;
   cp_grant_id_t grant_id;
@@ -799,7 +797,7 @@ uid_t id;
   m.REQ_SEEK_POS_LO = ex64lo(pos);
   m.REQ_SEEK_POS_HI = 0;	/* Not used for now, so clear it. */
   m.REQ_NBYTES = num_of_bytes;
-  m.m3_i1 = id;
+  m.m3_i1 = caller_uid;
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
   cpf_revoke(grant_id);
@@ -809,7 +807,8 @@ uid_t id;
 	*new_posp = cvul64(m.RES_SEEK_POS_LO);
 	*cum_iop = m.RES_NBYTES;
   }
-
+  else
+      printf("Problem in MFS r:%d\n",r);
   return(r);
 }
 
