@@ -9,3 +9,4 @@ testtable:
 testprotect:
 	gcc ${GCCOPT} -c protectfile.c rijndael.c
 	gcc ${GCCOPT} -o protectfile protectfile.o rijndael.o
+	./protectfile
