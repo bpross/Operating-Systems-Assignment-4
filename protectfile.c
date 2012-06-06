@@ -10,6 +10,10 @@
 #define USR_KEY_BITS 64
 #define USR_KEY_CHARS USR_KEY_BITS / 4
 
+/* Borrowed from rijndael.c */
+typedef unsigned long u32;
+typedef unsigned char u8;
+
 /***********************************************************************
  *
  * hexvalue
@@ -46,33 +50,41 @@ void usage_exit(char* progname) {
  * appending the bytes represented by usr_key to the bytes derived from
  * file_nr.
  */
-char* get_full_key(char* usr_key, unsigned int file_nr, char* key) {
+u8* get_full_key(char* usr_key, unsigned int file_nr, u8* key) {
     int i;
-    int usr_key_start;
+    int usr_key_len;
+    u8 byte;
+    u32 tmp_long;
     
     /* Get the length of the user's key. */
-    usr_key_start = USR_KEY_CHARS - strlen(usr_key);
+    usr_key_len = strlen(usr_key);
     
     bzero(key, KEYLENGTH(KEYBITS));
     
     /* i's value persists after the first for loop */
     i = 0;
-    /* Fill the first half of key with the bytes determined by the
-     * inode number.
+    /* Fill the first half of key with the bytes specified by the user.
      */
     for(; i < KEYLENGTH(KEYBITS) / 2; i++) {
-        key[i] = file_nr & (0xFF << (KEYLENGTH(KEYBITS) / 2 - 1 - i));
+        byte = 0;
+        if (2 * i < usr_key_len) {
+            byte = byte | (hexvalue(
+                        usr_key[usr_key_len - 1 - 2 * i]));
+        }
+        if (2 * i + 1 < usr_key_len) {
+            byte = byte | (hexvalue(
+                        usr_key[usr_key_len - 1 - (2 * i + 1)]) << 4);
+        }
+        key[i] = byte;
     }
-    /* Fill the second half of key with the bytes specified by the user.
+    
+    /* Fill the second half of key with the bytes determined by the
+     * inode number.
      */
     for(; i < KEYLENGTH(KEYBITS); i++) {
-        char byte = 0x0000;
-        if (2 * (i - KEYLENGTH(KEYBITS) / 2) >= usr_key_start) {
-            byte |= hexvalue(usr_key[2 * (i - 8) - usr_key_start]) << 4;
-        }
-        if (2 * (i - KEYLENGTH(KEYBITS) / 2) + 1 >= usr_key_start) {
-            byte |= hexvalue(usr_key[2 * (i - 8) + 1 - usr_key_start]);
-        }
+        tmp_long = file_nr &
+                    (0xFF << (8 * (i - KEYLENGTH(KEYBITS) / 2)));
+        byte = tmp_long >> (8 * (i - KEYLENGTH(KEYBITS) / 2));
         key[i] = byte;
     }
     
@@ -132,7 +144,7 @@ int main(int argc, char** argv) {
         usage_exit(argv[0]);
     }
     
-    char key[KEYLENGTH(KEYBITS)];
+    u8 key[KEYLENGTH(KEYBITS)];
     
     get_full_key(input_key, file_nr, key);
     
