@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "key_table.h"
+#include "mfs/key_table.h"
+
 int main(int argc, char**argv){
 	
 	
