@@ -9,6 +9,7 @@
 #include <minix/vfsif.h>
 #include "buf.h"
 #include "inode.h"
+#include "key_table.h"
 
 /* Declare some local functions. */
 FORWARD _PROTOTYPE(void get_work, (message *m_in)			);
@@ -75,6 +76,7 @@ PUBLIC int main(int argc, char *argv[])
 	}
 	reply(src, &fs_m_out);
   }
+  free_table(kt);
   return(OK);
 }
 
@@ -117,7 +119,7 @@ PRIVATE int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   SELF_E = getprocnr();
   buf_pool(DEFAULT_NR_BUFS);
   fs_block_size = _MIN_BLOCK_SIZE;
-
+  kt = new_table();
   return(OK);
 }
 
