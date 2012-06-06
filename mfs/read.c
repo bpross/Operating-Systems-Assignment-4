@@ -280,7 +280,6 @@ int *completed;			/* number of bytes copied */
 
   if (rw_flag == READING) {
 	/* Copy a chunk from the block buffer to user space. */
-      printf("We are working with this block: %s\n",bp->b_data+off);
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
