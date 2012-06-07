@@ -45,7 +45,7 @@ PUBLIC int req_breadwrite(
   int r;
   cp_grant_id_t grant_id;
   message m;
-  printf("VFS: UID: %d\n",getuid());
+  printf("VFS request: UID: %d\n",getuid());
   grant_id = cpf_grant_magic(fs_e, user_e, (vir_bytes) user_addr, num_of_bytes,
 			(rw_flag == READING ? CPF_WRITE : CPF_READ));
   if(grant_id == -1)
