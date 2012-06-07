@@ -81,7 +81,7 @@ int rw_flag;			/* READING or WRITING */
   scratch(fp).file.fd_nr = m_in.fd;
   scratch(fp).io.io_buffer = m_in.buffer;
   scratch(fp).io.io_nbytes = (size_t) m_in.nbytes;
-  printf("UID: %d\n",m_in.m2_i1);
+  caller_uid = m_in.m2_i1;
   locktype = (rw_flag == READING) ? VNODE_READ : VNODE_WRITE;
   if ((f = get_filp(scratch(fp).file.fd_nr, locktype)) == NULL)
 	return(err_code);
@@ -95,7 +95,7 @@ int rw_flag;			/* READING or WRITING */
   }
 
   r = read_write(rw_flag, f, scratch(fp).io.io_buffer, scratch(fp).io.io_nbytes,
-		 who_e, m_in.m2_i1);
+		 who_e);
 
   unlock_filp(f);
   return(r);
@@ -105,7 +105,7 @@ int rw_flag;			/* READING or WRITING */
  *				read_write				     *
  *===========================================================================*/
 PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
-		      endpoint_t for_e, uid_t id)
+		      endpoint_t for_e)
 {
   register struct vnode *vp;
   u64_t position, res_pos, new_pos;
@@ -161,7 +161,7 @@ PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
 	lock_bsf();
 
 	r = req_breadwrite(vp->v_bfs_e, for_e, vp->v_sdev, position, size,
-			   buf, rw_flag, &res_pos, &res_cum_io, id);
+			   buf, rw_flag, &res_pos, &res_cum_io);
 	if (r == OK) {
 		position = res_pos;
 		cum_io += res_cum_io;
@@ -290,7 +290,7 @@ size_t req_size;
 	panic("unmapped pipe");
 
   r = req_readwrite(vp->v_mapfs_e, vp->v_mapinode_nr, position, rw_flag, usr_e,
-		    buf, size, &new_pos, &cum_io_incr, -1);
+		    buf, size, &new_pos, &cum_io_incr);
 
   if (r >= 0) {
 	if (ex64hi(new_pos))
