@@ -222,7 +222,7 @@ _PROTOTYPE( void lock_bsf, (void)					);
 _PROTOTYPE( void unlock_bsf, (void)					);
 _PROTOTYPE( int do_read_write, (int rw_flag)				);
 _PROTOTYPE( int read_write, (int rw_flag, struct filp *f, char *buffer,
-			     size_t nbytes, endpoint_t for_e, uid_t id				);
+			     size_t nbytes, endpoint_t for_e, uid_t id)				);
 _PROTOTYPE( int rw_pipe, (int rw_flag, endpoint_t usr, struct filp *f,
 			 char *buf, size_t req_size)	);
 
