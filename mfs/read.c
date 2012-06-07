@@ -39,7 +39,7 @@ PUBLIC int fs_readwrite(void)
   size_t nrbytes;
   caller_uid = fs_m_in.m3_i1;
   r = OK;
-  
+ printf("Made it\n") 
   /* Find the inode referred */
   if ((rip = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR)) == NULL)
 	return(EINVAL);
@@ -155,7 +155,7 @@ PUBLIC int fs_breadwrite(void)
   caller_uid = fs_m_in.m3_i1;
   /* Pseudo inode for rw_chunk */
   struct inode rip;
-  
+  printf("Made it b\n"); 
   r = OK;
 
   target_dev = (dev_t) fs_m_in.REQ_DEV2;
