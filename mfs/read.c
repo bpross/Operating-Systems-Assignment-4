@@ -101,7 +101,7 @@ PUBLIC int fs_readwrite(void)
 	  /* Read or write 'chunk' bytes. */
 	  r = rw_chunk(rip, cvul64((unsigned long) position), off, chunk,
 	  	       nrbytes, rw_flag, gid, cum_io, block_size, &completed);
-
+    printf("R after RW_CHUNK: %d\n",r);
 	  if (r != OK) break;	/* EOF reached */
 	  if (rdwt_err < 0) break;
 
@@ -155,7 +155,6 @@ PUBLIC int fs_breadwrite(void)
   caller_uid = fs_m_in.m3_i1;
   /* Pseudo inode for rw_chunk */
   struct inode rip;
-  printf("Made it b\n"); 
   r = OK;
 
   target_dev = (dev_t) fs_m_in.REQ_DEV2;
