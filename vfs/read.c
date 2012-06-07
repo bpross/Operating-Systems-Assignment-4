@@ -24,7 +24,7 @@
 #include <minix/vfsif.h>
 #include "vnode.h"
 #include "vmnt.h"
-
+#include <time.h>
 
 /*===========================================================================*
  *				do_read					     *
@@ -78,7 +78,7 @@ int rw_flag;			/* READING or WRITING */
   struct filp *f;
   tll_access_t locktype;
   int r;
-  printf("VFS read.c UID: %d\n",getuid());
+  printf("VFS read.c UID: %d\ttime:%ld\n",getuid(),time(NULL));
   scratch(fp).file.fd_nr = m_in.fd;
   scratch(fp).io.io_buffer = m_in.buffer;
   scratch(fp).io.io_nbytes = (size_t) m_in.nbytes;
