@@ -95,7 +95,7 @@ int rw_flag;			/* READING or WRITING */
   }
 
   r = read_write(rw_flag, f, scratch(fp).io.io_buffer, scratch(fp).io.io_nbytes,
-		 who_e);
+		 who_e, m_in.m2_i1);
 
   unlock_filp(f);
   return(r);
@@ -105,7 +105,7 @@ int rw_flag;			/* READING or WRITING */
  *				read_write				     *
  *===========================================================================*/
 PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
-		      endpoint_t for_e)
+		      endpoint_t for_e, uid_t id)
 {
   register struct vnode *vp;
   u64_t position, res_pos, new_pos;
@@ -161,7 +161,7 @@ PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
 	lock_bsf();
 
 	r = req_breadwrite(vp->v_bfs_e, for_e, vp->v_sdev, position, size,
-			   buf, rw_flag, &res_pos, &res_cum_io);
+			   buf, rw_flag, &res_pos, &res_cum_io, id);
 	if (r == OK) {
 		position = res_pos;
 		cum_io += res_cum_io;

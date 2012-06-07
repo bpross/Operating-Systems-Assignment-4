@@ -34,6 +34,8 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
+  caller_uid = fs_m_in.m3_i1;
+  printf("Caller UID in MFS: %d\n",caller_uid);
   r = OK;
   
   /* Find the inode referred */
@@ -149,7 +151,8 @@ PUBLIC int fs_breadwrite(void)
   unsigned int off, cum_io, chunk, block_size;
   size_t nrbytes;
   dev_t target_dev;
-
+  caller_uid = fs_m_in.m3_i1;
+  printf("Caller UID in MFS: %d\n",caller_uid);
   /* Pseudo inode for rw_chunk */
   struct inode rip;
   
