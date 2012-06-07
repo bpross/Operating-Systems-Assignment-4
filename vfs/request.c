@@ -806,7 +806,8 @@ unsigned int *cum_iop;
 	*new_posp = cvul64(m.RES_SEEK_POS_LO);
 	*cum_iop = m.RES_NBYTES;
   }
-
+  else
+      printf("Problem in MFS r:%d\n",r);
   return(r);
 }
 
