@@ -9,7 +9,7 @@
 #include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
-
+#include <time.h>
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -34,7 +34,7 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
-  
+  printf("MFS: UID: %d\ttime: %ld\n",getuid(),time(NULL));  
   r = OK;
   
   /* Find the inode referred */
