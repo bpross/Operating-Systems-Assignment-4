@@ -176,7 +176,7 @@ PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
 
 	/* Issue request */
 	r = req_readwrite(vp->v_fs_e, vp->v_inode_nr, position, rw_flag, for_e,
-			  buf, size, &new_pos, &cum_io_incr);
+			  buf, size, &new_pos, &cum_io_incr, id);
 
 	if (r >= 0) {
 		if (ex64hi(new_pos))
@@ -290,7 +290,7 @@ size_t req_size;
 	panic("unmapped pipe");
 
   r = req_readwrite(vp->v_mapfs_e, vp->v_mapinode_nr, position, rw_flag, usr_e,
-		    buf, size, &new_pos, &cum_io_incr);
+		    buf, size, &new_pos, &cum_io_incr, id);
 
   if (r >= 0) {
 	if (ex64hi(new_pos))
