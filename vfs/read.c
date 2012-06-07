@@ -176,7 +176,7 @@ PUBLIC int read_write(int rw_flag, struct filp *f, char *buf, size_t size,
 
 	/* Issue request */
 	r = req_readwrite(vp->v_fs_e, vp->v_inode_nr, position, rw_flag, for_e,
-			  buf, size, &new_pos, &cum_io_incr, id);
+			  buf, size, &new_pos, &cum_io_incr);
 
 	if (r >= 0) {
 		if (ex64hi(new_pos))
