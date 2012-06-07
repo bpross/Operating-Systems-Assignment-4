@@ -168,7 +168,7 @@ PUBLIC int fs_breadwrite(void)
   /* Don't block-write to a RO-mounted filesystem. */
   if(superblock.s_dev == target_dev && superblock.s_rd_only)
   	return EROFS;
-
+printf("rip.i_mode: %d\n",rip.i_mode);
   rip.i_zone[0] = (zone_t) target_dev;
   rip.i_mode = I_BLOCK_SPECIAL;
   rip.i_size = 0;
