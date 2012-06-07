@@ -39,7 +39,6 @@ PUBLIC int fs_readwrite(void)
   size_t nrbytes;
   caller_uid = fs_m_in.m3_i1;
   r = OK;
- printf("Made it r: %d\n",r);
   /* Find the inode referred */
   if ((rip = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR)) == NULL)
 	return(EINVAL);
@@ -101,7 +100,6 @@ PUBLIC int fs_readwrite(void)
 	  /* Read or write 'chunk' bytes. */
 	  r = rw_chunk(rip, cvul64((unsigned long) position), off, chunk,
 	  	       nrbytes, rw_flag, gid, cum_io, block_size, &completed);
-    printf("R after RW_CHUNK: %d\n",r);
 	  if (r != OK) break;	/* EOF reached */
 	  if (rdwt_err < 0) break;
 
@@ -136,7 +134,6 @@ PUBLIC int fs_readwrite(void)
   }
   
   fs_m_out.RES_NBYTES = cum_io;
-  printf("return r: %d\n",r);  
   return(r);
 }
 
