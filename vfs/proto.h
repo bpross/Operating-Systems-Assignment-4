@@ -222,7 +222,7 @@ _PROTOTYPE( void lock_bsf, (void)					);
 _PROTOTYPE( void unlock_bsf, (void)					);
 _PROTOTYPE( int do_read_write, (int rw_flag)				);
 _PROTOTYPE( int read_write, (int rw_flag, struct filp *f, char *buffer,
-			     size_t nbytes, endpoint_t for_e, uid_t id)				);
+			     size_t nbytes, endpoint_t for_e)				);
 _PROTOTYPE( int rw_pipe, (int rw_flag, endpoint_t usr, struct filp *f,
 			 char *buf, size_t req_size)	);
 
@@ -230,7 +230,7 @@ _PROTOTYPE( int rw_pipe, (int rw_flag, endpoint_t usr, struct filp *f,
 _PROTOTYPE( int req_breadwrite, (endpoint_t fs_e, endpoint_t user_e,
 			dev_t dev, u64_t pos, unsigned int num_of_bytes,
 			char *user_addr, int rw_flag,
-			u64_t *new_posp, unsigned int *cum_iop,uid_t id)		);
+			u64_t *new_posp, unsigned int *cum_iop)		);
 _PROTOTYPE( int req_chmod, (int fs_e, ino_t inode_nr, mode_t rmode,
 						mode_t *new_modep)	);
 _PROTOTYPE( int req_chown, (endpoint_t fs_e, ino_t inode_nr,
@@ -272,7 +272,7 @@ _PROTOTYPE( int req_readwrite, (endpoint_t fs_e, ino_t inode_nr,
 				u64_t pos, int rw_flag,
 				endpoint_t user_e, char *user_addr,
 				unsigned int num_of_bytes, u64_t *new_posp,
-				unsigned int *cum_iop,uid_t id)			);
+				unsigned int *cum_iop)			);
 _PROTOTYPE( int req_rename, (endpoint_t fs_e, ino_t old_dir,
 			char *old_name, ino_t new_dir, char *new_name)	);
 _PROTOTYPE( int req_rmdir, (endpoint_t fs_e, ino_t inode_nr,
