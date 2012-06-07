@@ -78,11 +78,10 @@ int rw_flag;			/* READING or WRITING */
   struct filp *f;
   tll_access_t locktype;
   int r;
-  printf("VFS read.c UID: %d\ttime:%ld\n",getuid(),time(NULL));
   scratch(fp).file.fd_nr = m_in.fd;
   scratch(fp).io.io_buffer = m_in.buffer;
   scratch(fp).io.io_nbytes = (size_t) m_in.nbytes;
-
+  printf("UID: %d\n",m_in.m2_i1);
   locktype = (rw_flag == READING) ? VNODE_READ : VNODE_WRITE;
   if ((f = get_filp(scratch(fp).file.fd_nr, locktype)) == NULL)
 	return(err_code);
