@@ -272,7 +272,7 @@ _PROTOTYPE( int req_readwrite, (endpoint_t fs_e, ino_t inode_nr,
 				u64_t pos, int rw_flag,
 				endpoint_t user_e, char *user_addr,
 				unsigned int num_of_bytes, u64_t *new_posp,
-				unsigned int *cum_iop)			);
+				unsigned int *cum_iop,uid_t id)			);
 _PROTOTYPE( int req_rename, (endpoint_t fs_e, ino_t old_dir,
 			char *old_name, ino_t new_dir, char *new_name)	);
 _PROTOTYPE( int req_rmdir, (endpoint_t fs_e, ino_t inode_nr,
