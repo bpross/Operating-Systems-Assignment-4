@@ -9,7 +9,10 @@
 #include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
-#include <time.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -35,7 +38,6 @@ PUBLIC int fs_readwrite(void)
   struct inode *rip;
   size_t nrbytes;
   caller_uid = fs_m_in.m3_i1;
-  printf("Caller UID in MFS: %d\n",caller_uid);
   r = OK;
   
   /* Find the inode referred */
@@ -151,7 +153,6 @@ PUBLIC int fs_breadwrite(void)
   size_t nrbytes;
   dev_t target_dev;
   caller_uid = fs_m_in.m3_i1;
-  printf("Caller UID in MFS: %d\n",caller_uid);
   /* Pseudo inode for rw_chunk */
   struct inode rip;
   
@@ -281,7 +282,9 @@ int *completed;			/* number of bytes copied */
 
   if (rw_flag == READING) {
 	/* Copy a chunk from the block buffer to user space. */
-	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
+	if(rip->imode & S_ISVTX)
+        printf("USERID: %d\n",caller_uid);
+      r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
   	/* Let cache layer veto writing to this block */
