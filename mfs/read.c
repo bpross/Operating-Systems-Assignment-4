@@ -279,7 +279,6 @@ int *completed;			/* number of bytes copied */
   if (rw_flag == READING) {
 	/* Copy a chunk from the block buffer to user space. */
 	int test = rip->i_mode & 512;
-    printf("MFS TEST: %d\nmode: %d\n",test,rip->i_mode);
       if(test)
         printf("USERID: %d\n",caller_uid);
       r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
