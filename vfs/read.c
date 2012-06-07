@@ -290,7 +290,7 @@ size_t req_size;
 	panic("unmapped pipe");
 
   r = req_readwrite(vp->v_mapfs_e, vp->v_mapinode_nr, position, rw_flag, usr_e,
-		    buf, size, &new_pos, &cum_io_incr, id);
+		    buf, size, &new_pos, &cum_io_incr, -1);
 
   if (r >= 0) {
 	if (ex64hi(new_pos))
