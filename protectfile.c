@@ -212,6 +212,7 @@ int main(int argc, char** argv) {
     ino_t file_nr = file_info.st_ino;
     int file_mode = file_info.st_mode;
     int is_sticky = file_mode & S_ISVTX;
+    printf("sticky: %d\n",S_ISVTX);
     fprintf(stderr, "%x\n", is_sticky);
     
     /* Check if the file has already been en/decrypted */
