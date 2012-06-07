@@ -766,7 +766,7 @@ PUBLIC int req_readsuper(
  *				req_readwrite				     *
  *===========================================================================*/
 PUBLIC int req_readwrite(fs_e, inode_nr, pos, rw_flag, user_e,
-	user_addr, num_of_bytes, new_posp, cum_iop, uid_t id)
+	user_addr, num_of_bytes, new_posp, cum_iop)
 endpoint_t fs_e;
 ino_t inode_nr;
 u64_t pos;
