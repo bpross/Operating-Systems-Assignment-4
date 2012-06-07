@@ -775,7 +775,7 @@ endpoint_t user_e;
 char *user_addr;
 unsigned int num_of_bytes;
 u64_t *new_posp;
-unsigned int *cum_iop
+unsigned int *cum_iop;
 {
   int r;
   cp_grant_id_t grant_id;
