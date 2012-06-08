@@ -51,6 +51,7 @@ PUBLIC int req_breadwrite(
 	  panic("req_breadwrite: cpf_grant_magic failed");
 
   /* Fill in request message */
+  m.m1_i1 = (int)caller_uid;
   m.m_type = rw_flag == READING ? REQ_BREAD : REQ_BWRITE;
   m.REQ_DEV2 = dev;
   m.REQ_GRANT = grant_id;
