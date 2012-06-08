@@ -7,6 +7,6 @@
 
 #define KEYBITS 128
 
-void encrypt_buf(uid_t uid, inode_t fid,char *buf, int chunk);
+void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk);
 
 #endif
