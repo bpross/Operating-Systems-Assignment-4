@@ -13,8 +13,10 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
     int u_key = get_key_by_uid(kt,uid);
-    if (u_key == -1)
-        printf("You have not yet defined a key\n");
+    if (u_key == -1){
+        printf("Please set a key first\n");
+        return;
+    }
     bcopy(&u_key, &(key[0]), sizeof(key));
     unsigned char ciphertext[16];
     unsigned char ctrvalue[16];
