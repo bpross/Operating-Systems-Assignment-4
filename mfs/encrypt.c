@@ -35,7 +35,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
             rijndaelEncrypt(rk,nrounds, ctrvalue, ciphertext);
 
             for(i=0; i < 16; i++){
-                *(buf[i+offset]) ^= ciphertext[i];
+                *(buf+i+offset) ^= ciphertext[i];
                 printf("Encrypted: %c\n",*(buf+i));
             }
             offset += 16;
