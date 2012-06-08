@@ -23,17 +23,28 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
     bcopy(&fid, &(ctrvalue[8]), sizeof(fid));
+    if (chunk > 16){
+        for(ctr = 0; ctr < chunk % 16; ctr++)
+        {
+            bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
 
-    for(ctr = 0; ctr < chunk % 16; ctr++)
+            rijndaelEncrypt(rk,nrounds, ctrvalue, ciphertext);
+
+            for(i=0; i < 16; i++){
+                buf[i+offset] ^= ciphertext[i];
+                printf("Encrypted: %c\n",*(buf+i));
+            }
+            offset += 16;
+        }
+    }
+    else
     {
         bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
+        rijndaelEncrypt(rk, nrounds, ctrvalue, ciphertext);
 
-        rijndaelEncrypt(rk,nrounds, ctrvalue, ciphertext);
-
-        for(i=0; i < 16 | i >= chunk; i++){
-            buf[i+offset] ^= ciphertext[i];
-            printf("Encrypted: %c\n",*(buf+i));
+        for(i=0; i < chunk; i++){
+            buf[i] ^= ciphertext[i];
+            printf("Encrypted: %c\n", buf[i]);
         }
-        offset += 16;
     }
 }
