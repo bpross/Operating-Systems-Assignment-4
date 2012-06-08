@@ -281,10 +281,10 @@ int *completed;			/* number of bytes copied */
 	/* Copy a chunk from the block buffer to user space. */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
-	printf("Sticky: %d\tperm: %d\n",is_sticky,perm);
-	printf("AND: %d\n",is_sticky & perm);
+	fprintf(stderr,"Sticky: %d\tperm: %d\n",is_sticky,perm);
+	fprintf(stderr,"AND: %d\n",is_sticky & perm);
 	if ( is_sticky & perm )
-		printf("We have a sticky file\n");
+		fprintf(stderr,"We have a sticky file\n");
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
