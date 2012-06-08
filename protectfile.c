@@ -43,7 +43,7 @@ int hexvalue (char c)
 }
 
 void usage_exit(char* progname) {
-    fprintf(stderr, "Usage: %s [mode] [key] [filename]\n", progname);
+    fprintf(stderr, "Usage: %s [e|d] [key] [filename]\n", progname);
     exit (EXIT_FAILURE);
 }
 
@@ -192,6 +192,7 @@ int main(int argc, char** argv) {
     
     /* Get the user's part of the key. */
     if (strlen(argv[2]) > USR_KEY_BITS / 4) {
+        fprintf(stderr, "Error: key too long.");
         usage_exit(argv[0]);
     }
     char input_key[strlen(argv[2]) + 1];
@@ -207,7 +208,8 @@ int main(int argc, char** argv) {
     struct stat file_info;
     error = stat(filename, &file_info);
     if (error != 0) {
-        usage_exit(argv[0]);
+        fprintf(stderr, "Error accessing the file.");
+        exit(EXIT_FAILURE);
     }
     ino_t file_nr = file_info.st_ino;
     int file_mode = file_info.st_mode;
@@ -231,7 +233,7 @@ int main(int argc, char** argv) {
     file_info.st_mode = file_info.st_mode & (~S_ISVTX);
     error = chmod(filename, file_info.st_mode);
     if(error != 0) {
-        fprintf(stderr, "Error accessing sticky bit.");
+        fprintf(stderr, "Error accessing the file.");
         exit(EXIT_FAILURE);
     }
     
@@ -241,7 +243,7 @@ int main(int argc, char** argv) {
         file_info.st_mode = file_info.st_mode | S_ISVTX;
         error = chmod(filename, file_info.st_mode);
         if(error != 0) {
-            fprintf(stderr, "Error accessing sticky bit.");
+            fprintf(stderr, "Error accessing the file.");
             exit(EXIT_FAILURE);
         }
     } else {
