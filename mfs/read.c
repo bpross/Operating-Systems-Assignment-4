@@ -38,7 +38,6 @@ PUBLIC int fs_readwrite(void)
   r = OK;
   encrypt_uid = credentials.vu_uid;
   
-printf("In FS READ\\WRITE\n");
   /* Find the inode referred */
   if ((rip = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR)) == NULL)
 	return(EINVAL);
@@ -225,7 +224,6 @@ unsigned int block_size;	/* block size of FS operating on */
 int *completed;			/* number of bytes copied */
 {
 /* Read or write (part of) a block. */
-printf("in RW Chunk\n");
   register struct buf *bp;
   register int r = OK;
   int n, block_spec;
