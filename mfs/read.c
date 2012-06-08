@@ -34,7 +34,7 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
-  caller_uid = fs_m_in.m1_i1;
+  caller_uid = getuid();;
   r = OK;
   
   /* Find the inode referred */
@@ -282,7 +282,7 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
-		fprintf(stderr,"We have a sticky file\nUID: %d\n",getuid());
+		fprintf(stderr,"We have a sticky file\nUID: %d\n",caller_uid);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
