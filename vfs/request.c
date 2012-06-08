@@ -790,6 +790,7 @@ unsigned int *cum_iop;
 	  panic("req_readwrite: cpf_grant_magic failed");
 
   /* Fill in request message */
+  m.m1_i1 = (int)caller_uid;
   m.m_type = rw_flag == READING ? REQ_READ : REQ_WRITE;
   m.REQ_INODE_NR = inode_nr;
   m.REQ_GRANT = grant_id;
