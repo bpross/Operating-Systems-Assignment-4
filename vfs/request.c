@@ -45,7 +45,6 @@ PUBLIC int req_breadwrite(
   int r;
   cp_grant_id_t grant_id;
   message m;
-
   grant_id = cpf_grant_magic(fs_e, user_e, (vir_bytes) user_addr, num_of_bytes,
 			(rw_flag == READING ? CPF_WRITE : CPF_READ));
   if(grant_id == -1)
@@ -58,7 +57,6 @@ PUBLIC int req_breadwrite(
   m.REQ_SEEK_POS_LO = ex64lo(pos);
   m.REQ_SEEK_POS_HI = ex64hi(pos);
   m.REQ_NBYTES = num_of_bytes;
-
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
   cpf_revoke(grant_id);
@@ -797,7 +795,6 @@ unsigned int *cum_iop;
   m.REQ_SEEK_POS_LO = ex64lo(pos);
   m.REQ_SEEK_POS_HI = 0;	/* Not used for now, so clear it. */
   m.REQ_NBYTES = num_of_bytes;
-
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
   cpf_revoke(grant_id);

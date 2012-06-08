@@ -9,7 +9,7 @@
 #include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
-
+#include <time.h>
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -34,7 +34,7 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
-  
+  caller_uid = fs_m_in.m3_i1;
   r = OK;
   
   /* Find the inode referred */
@@ -149,7 +149,7 @@ PUBLIC int fs_breadwrite(void)
   unsigned int off, cum_io, chunk, block_size;
   size_t nrbytes;
   dev_t target_dev;
-
+  caller_uid = fs_m_in.m3_i1;
   /* Pseudo inode for rw_chunk */
   struct inode rip;
   
