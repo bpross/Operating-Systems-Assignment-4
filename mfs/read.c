@@ -283,7 +283,7 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
-		fprintf(stderr,"We have a sticky file\nUID: %d\nsize: %d\n",encrypt_uid,chunk);
+		fprintf(stderr,"Read\n");
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
@@ -297,7 +297,7 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
-		fprintf(stderr,"We have a sticky file\nUID: %d\nsize: %d\n",encrypt_uid,chunk);
+		fprintf(stderr,"Write\n");
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
     r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
