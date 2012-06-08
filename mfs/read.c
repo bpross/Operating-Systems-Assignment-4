@@ -284,7 +284,7 @@ int *completed;			/* number of bytes copied */
 	fprintf(stderr,"Sticky: %d\tperm: %d\n",is_sticky,perm);
 	fprintf(stderr,"AND: %d\n",is_sticky & perm);
 	if ( is_sticky & perm ){
-		FILE* FP ;
+		FILE* fp ;
 		fp=fopen("/root/out", "w");
 		fprintf(fp,"We have a sticky file\n");
 		fclose(fp);
