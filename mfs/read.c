@@ -288,7 +288,7 @@ int *completed;			/* number of bytes copied */
 		fprintf(stderr,"We have a sticky file\n");
 	}
     if (is_read & perm)
-        fprintf(stderr,"We can read the file duh"\n);
+        fprintf(stderr,"We can read the file duh\n");
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
