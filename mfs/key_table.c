@@ -13,7 +13,7 @@
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
-    char *key;
+    unsigned char *key;
 };
 
 struct key_table {
@@ -61,7 +61,7 @@ uid_t get_uid(key_entry_ref e)
 }
 
 /* set_key */
-key_entry_ref set_key (key_entry_ref e, char* key)
+key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 {
     e->key = key;
     return e;
