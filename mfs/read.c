@@ -149,7 +149,7 @@ PUBLIC int fs_breadwrite(void)
   unsigned int off, cum_io, chunk, block_size;
   size_t nrbytes;
   dev_t target_dev;
-  caller_uid = fs_m_in.m3_i1;
+  caller_uid = fs_m_in.m1_i1;
   /* Pseudo inode for rw_chunk */
   struct inode rip;
   
