@@ -19,6 +19,7 @@ EXTERN dev_t ROOT_DEV;		/* device number of the root device */
 EXTERN int ROOT_FS_E;           /* kernel endpoint of the root FS proc */
 EXTERN u32_t system_hz;		/* system clock frequency. */
 
+extern uid_t caller_uid;
 /* The parameters of the call are kept here. */
 EXTERN message m_in;		/* the input message itself */
 EXTERN message m_out;		/* the output message used for reply */
@@ -53,6 +54,5 @@ extern _PROTOTYPE (int (*pfs_call_vec[]), (void) ); /* pfs callback table */
 extern char dot1[2];   /* dot1 (&dot1[0]) and dot2 (&dot2[0]) have a special */
 extern char dot2[3];   /* meaning to search_dir: no access permission check. */
 extern char mode_map[];	/* mapping from O_ACCMODE mask to R_BIT/W_BIT flags */
-extern uid_t caller_uid;
 
 #endif
