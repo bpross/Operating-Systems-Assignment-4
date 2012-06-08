@@ -49,7 +49,7 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = (uid_t)fs_m_in.m2_i1;
-    if(get_key_by_uid(kt,id) != -1)
+    if(get_key_by_uid(kt,id) != NULL )
         fprintf(stderr,"SETKEY ERROR: Key already set for: %d\n",id);
     else
     {
