@@ -100,9 +100,22 @@ int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
         return -1;
     else 
     {
-        kt->keys[kt->entries] = set_uid(kt->keys[kt->entries],userid);
-        kt->keys[kt->entries] = set_key(kt->keys[kt->entries],key);
-        kt->entries++;
+        unsigned char * u_key = get_key_by_uid(kt,userid);
+        if ( u_key != NULL )
+        {
+            int i;
+            for(i = 0;i<kt->entries;i++)
+            {
+                if(get_uid(kt->keys[i]) == userid)
+                    kt->keys[i] = set_key(kt->keys[i],key);
+            } 
+            printf("Key Updated\n");
+        }
+        else {
+            kt->keys[kt->entries] = set_uid(kt->keys[kt->entries],userid);
+            kt->keys[kt->entries] = set_key(kt->keys[kt->entries],key);
+            kt->entries++;
+        }
         return 1;
     }
 }
