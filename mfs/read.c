@@ -96,7 +96,6 @@ PUBLIC int fs_readwrite(void)
 	  }
 	  
 	  /* Read or write 'chunk' bytes. */
-      printf("In READ\tUID: %d",getuid());
 	  r = rw_chunk(rip, cvul64((unsigned long) position), off, chunk,
 	  	       nrbytes, rw_flag, gid, cum_io, block_size, &completed);
 
@@ -231,7 +230,6 @@ int *completed;			/* number of bytes copied */
   int n, block_spec;
   block_t b;
   dev_t dev;
-  printf("In Chunk\tUID: %d\n",getuid());
   *completed = 0;
 
   block_spec = (rip->i_mode & I_TYPE) == I_BLOCK_SPECIAL;
@@ -281,6 +279,12 @@ int *completed;			/* number of bytes copied */
 
   if (rw_flag == READING) {
 	/* Copy a chunk from the block buffer to user space. */
+	int is_sticky = 512;
+	int perm = rip->i_mode;
+	printf("Sticky: %d\tperm: %d\n",is_sticky,perm);
+	printf("AND: %d\n",is_sticky & perm);
+	if ( is_sticky & perm )
+		printf("We have a sticky file\n");
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
