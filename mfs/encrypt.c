@@ -28,6 +28,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     bcopy(&fid, &(ctrvalue[8]), sizeof(fid));
     if (chunk > 16){
+        printf("Encryption!\n");
         for(ctr = 0; ctr < chunk % 16; ctr++)
         {
             bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
