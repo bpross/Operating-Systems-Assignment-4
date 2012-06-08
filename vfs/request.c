@@ -797,7 +797,6 @@ unsigned int *cum_iop;
   m.REQ_SEEK_POS_LO = ex64lo(pos);
   m.REQ_SEEK_POS_HI = 0;	/* Not used for now, so clear it. */
   m.REQ_NBYTES = num_of_bytes;
-  m.m1_i1 = caller_uid;
   /* Send/rec request */
   r = fs_sendrec(fs_e, &m);
   cpf_revoke(grant_id);
