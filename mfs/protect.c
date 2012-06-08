@@ -53,7 +53,11 @@ PUBLIC int fs_setkey()
         fprintf(stderr,"SETKEY ERROR: Key already set for: %d\n",id);
     else
     {
-        int check = add_to_table(kt,id,k0+k1);
+        unsigned char key[128];
+        bcopy(&k0, &(key[0]), sizeof(k0));
+        bcopy(&k1, &(key[sizeof(k0)]), sizeof(k1));
+
+        int check = add_to_table(kt,id,key);
         if(check == -1)
             fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
         else

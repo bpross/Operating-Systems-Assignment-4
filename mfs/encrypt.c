@@ -12,8 +12,8 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
-    int u_key = get_key_by_uid(kt,uid);
-    if (u_key == -1){
+    char * u_key = get_key_by_uid(kt,uid);
+    if (u_key == NULL){
         printf("Please set a key first\n");
         return;
     }

@@ -15,9 +15,9 @@ int main(int argc, char**argv){
     printf("Verification: Cur_UID: %d\t Entry UID: %d\n",cur_uid,get_uid(e));
 
     printf("Testing set_key\n");
-    int key = 1337;
+    char key[128] = "asdfasdfasdfasd";
     set_key(e,key);
-    printf("Verification: Key: %d\t Entry Key: %d\n",key,get_key(e));
+    printf("Verification: Key: %s\t Entry Key: %s\n",key,get_key(e));
 
     free(e); //we are no longer going to use this
 
@@ -36,6 +36,7 @@ int main(int argc, char**argv){
     printf("Check: %d\n",check);
     print_table(kt);
     // Going to fill up the table
+    /*
     printf("Testing add_to_table\n");
     check = add_to_table(kt,cur_uid+1,key+1);
     printf("Check: %d\n",check);
@@ -84,6 +85,7 @@ int main(int argc, char**argv){
     // Testing free
     printf("Testing free table\n");
     free_table(kt);
+    */
 	return 0;
 }
 
