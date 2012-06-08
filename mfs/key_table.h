@@ -69,7 +69,7 @@ key_entry_ref set_key (key_entry_ref e,unsigned char* key); //tested
  * @param e: entry in the table to se the key
  * This gets the key for the appropriate entry
  */
-char * get_key (key_entry_ref e); //tested
+unsigned char * get_key (key_entry_ref e); //tested
 /*
  * new_table: void
  * This creates a new key table. Sets entries to 0
