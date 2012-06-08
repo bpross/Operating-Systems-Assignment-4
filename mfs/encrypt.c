@@ -7,15 +7,15 @@
 
 void encrypt_buf(uid_t uid, inode_t fid,char *buf, int chunk){
 
-    unsigned long kr[RKLENGTH(KEYBITS)];
+    unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
-    int key = get_key_by_uid(kt,uid);
-    bcopy(&key, &(key[0]), sizeof(key));
+    int u_key = get_key_by_uid(kt,uid);
+    bcopy(&u_key, &(key[0]), sizeof(key));
     unsigned char ciphertext[16];
     unsigned char ctrvalue[16];
     int nrounds;
     int offset = 0;
-    int i;
+    int i,ctr;
 
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
@@ -29,7 +29,7 @@ void encrypt_buf(uid_t uid, inode_t fid,char *buf, int chunk){
 
         for(i=0; i < 16 | i >= chunk; i++){
             buf[i+offset] ^= ciphertext[i];
-            printf("Encrypted: %c\n",*(buff+i));
+            printf("Encrypted: %c\n",*(buf+i));
         }
         offset += 16;
     }
