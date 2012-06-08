@@ -82,7 +82,7 @@ int rw_flag;			/* READING or WRITING */
   scratch(fp).io.io_buffer = m_in.buffer;
   scratch(fp).io.io_nbytes = (size_t) m_in.nbytes;
   locktype = (rw_flag == READING) ? VNODE_READ : VNODE_WRITE;
-  caller_uid = m_in.m2_i1;
+  caller_uid = fp->fp_effuid;
   if ((f = get_filp(scratch(fp).file.fd_nr, locktype)) == NULL)
 	return(err_code);
   if (((f->filp_mode) & (rw_flag == READING ? R_BIT : W_BIT)) == 0) {
