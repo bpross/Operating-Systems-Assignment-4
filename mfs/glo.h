@@ -27,6 +27,7 @@ EXTERN vfs_ucred_t credentials;
 
 EXTERN uid_t caller_uid;
 EXTERN gid_t caller_gid;
+EXTERN uid_t encrypt;
 
 EXTERN int req_nr;
 
