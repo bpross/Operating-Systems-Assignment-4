@@ -2,6 +2,7 @@
 #include "inode.h"
 #include "super.h"
 #include <minix/vfsif.h>
+#include <string.h>
 
 FORWARD _PROTOTYPE( int in_group, (gid_t grp)				);
 
@@ -49,11 +50,15 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = (uid_t)fs_m_in.m2_i1;
-    if(get_key_by_uid(kt,id) != -1)
+    if(get_key_by_uid(kt,id) != NULL )
         fprintf(stderr,"SETKEY ERROR: Key already set for: %d\n",id);
     else
     {
-        int check = add_to_table(kt,id,k0+k1);
+        unsigned char key[128];
+        bcopy(&k0, &(key[0]), sizeof(k0));
+        bcopy(&k1, &(key[sizeof(k0)]), sizeof(k1));
+
+        int check = add_to_table(kt,id,key);
         if(check == -1)
             fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
         else

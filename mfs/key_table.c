@@ -7,13 +7,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "fs.h"
+//#include "fs.h"
 #include "key_table.h"
 
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
-    int key;
+    unsigned char *key;
 };
 
 struct key_table {
@@ -61,14 +61,14 @@ uid_t get_uid(key_entry_ref e)
 }
 
 /* set_key */
-key_entry_ref set_key (key_entry_ref e, int key)
+key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 {
     e->key = key;
     return e;
 }
 
 /* get_key */
-int get_key(key_entry_ref e)
+unsigned char * get_key(key_entry_ref e)
 {
     return e->key;
 }
@@ -88,12 +88,12 @@ void print_table (key_table_ref kt)
     int i;
     for(i=0;i<kt->entries;++i)
     {
-        printf("%d:\tuid: %d\tkey: %d\n",i,kt->keys[i]->userid,kt->keys[i]->key);
+        printf("%d:\tuid: %d\tkey: %s\n",i,kt->keys[i]->userid,kt->keys[i]->key);
     }
 }
 
 /* add_to_table */
-int add_to_table(key_table_ref kt, uid_t userid, int key)
+int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
 {
     if(table_full(kt))
         /* Table is full. Cannot add to full table */
@@ -107,7 +107,7 @@ int add_to_table(key_table_ref kt, uid_t userid, int key)
     }
 }
 
-int get_key_by_uid(key_table_ref kt, uid_t id)
+unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
 {
     int i;
     for(i = 0;i<kt->entries;i++)
@@ -116,5 +116,5 @@ int get_key_by_uid(key_table_ref kt, uid_t id)
             return get_key(kt->keys[i]);
     }
     //not found
-    return -1;
+    return NULL;
 }

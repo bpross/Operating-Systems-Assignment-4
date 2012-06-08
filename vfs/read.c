@@ -92,7 +92,6 @@ int rw_flag;			/* READING or WRITING */
 	unlock_filp(f);
 	return(0);	/* so char special files need not check for 0*/
   }
-
   r = read_write(rw_flag, f, scratch(fp).io.io_buffer, scratch(fp).io.io_nbytes,
 		 who_e);
 

@@ -9,7 +9,8 @@
 #include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
-#include <time.h>
+#include <stdio.h>
+#include "mfs_encrypt.h"
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -34,13 +35,12 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
-  caller_uid = fs_m_in.m3_i1;
   r = OK;
+  encrypt_uid = credentials.vu_uid;
   
   /* Find the inode referred */
   if ((rip = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR)) == NULL)
 	return(EINVAL);
-
   mode_word = rip->i_mode & I_TYPE;
   regular = (mode_word == I_REGULAR || mode_word == I_NAMED_PIPE);
   block_spec = (mode_word == I_BLOCK_SPECIAL ? 1 : 0);
@@ -149,7 +149,7 @@ PUBLIC int fs_breadwrite(void)
   unsigned int off, cum_io, chunk, block_size;
   size_t nrbytes;
   dev_t target_dev;
-  caller_uid = fs_m_in.m3_i1;
+  caller_uid = fs_m_in.m1_i1;
   /* Pseudo inode for rw_chunk */
   struct inode rip;
   
@@ -224,7 +224,6 @@ unsigned int block_size;	/* block size of FS operating on */
 int *completed;			/* number of bytes copied */
 {
 /* Read or write (part of) a block. */
-
   register struct buf *bp;
   register int r = OK;
   int n, block_spec;
@@ -281,10 +280,9 @@ int *completed;			/* number of bytes copied */
 	/* Copy a chunk from the block buffer to user space. */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
-	fprintf(stderr,"Sticky: %d\tperm: %d\n",is_sticky,perm);
-	fprintf(stderr,"AND: %d\n",is_sticky & perm);
 	if ( is_sticky & perm ){
-		fprintf(stderr,"We have a sticky file\n");
+		fprintf(stderr,"Read\n");
+        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
@@ -294,7 +292,13 @@ int *completed;			/* number of bytes copied */
 	r = EPERM;
   } else {
 	/* Copy a chunk from user space to the block buffer. */
-	r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
+	int is_sticky = 512;
+	int perm = rip->i_mode;
+	if ( is_sticky & perm ){
+		fprintf(stderr,"Write\n");
+        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+	}
+    r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			     (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
 	MARKDIRTY(bp);
   }
