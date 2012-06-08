@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "mfs/key_table.h"
 
 int main(int argc, char**argv){
@@ -15,10 +16,14 @@ int main(int argc, char**argv){
     printf("Verification: Cur_UID: %d\t Entry UID: %d\n",cur_uid,get_uid(e));
 
     printf("Testing set_key\n");
-    char key[128] = "asdfasdfasdfasd";
+    unsigned char key[128];
+    int k0 = 1337;
+    int k1 = 31337;
+    bzero(key,sizeof(key));
+    bcopy(&k0, &(key[0]), sizeof(k0));
+    bcopy(&k1, &(key[sizeof(k1)]), sizeof(k1));
     char key2[128] = "benisasteeze";
     set_key(e,key);
-    printf("Verification: Key: %s\t Entry Key: %s\n",key,get_key(e));
 
     free(e); //we are no longer going to use this
 
