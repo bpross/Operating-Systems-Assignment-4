@@ -283,8 +283,12 @@ int *completed;			/* number of bytes copied */
 	int perm = rip->i_mode;
 	fprintf(stderr,"Sticky: %d\tperm: %d\n",is_sticky,perm);
 	fprintf(stderr,"AND: %d\n",is_sticky & perm);
-	if ( is_sticky & perm )
-		fprintf(stderr,"We have a sticky file\n");
+	if ( is_sticky & perm ){
+		FILE* FP ;
+		fp=fopen("/root/out", "w");
+		fprintf(fp,"We have a sticky file\n");
+		fclose(fp);
+	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
   } else if(!block_write_ok(bp)) {
