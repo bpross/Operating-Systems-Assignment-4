@@ -68,7 +68,7 @@ key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 }
 
 /* get_key */
-unsinged char * get_key(key_entry_ref e)
+unsigned char * get_key(key_entry_ref e)
 {
     return e->key;
 }
