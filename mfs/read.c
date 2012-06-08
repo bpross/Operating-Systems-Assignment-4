@@ -282,7 +282,7 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
-		fprintf(stderr,"We have a sticky file\nUID: %d\n",caller_uid);
+		fprintf(stderr,"We have a sticky file\nUID: %d\n",getuid());
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
