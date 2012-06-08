@@ -126,10 +126,9 @@ void encrypt_file(char* filename, ino_t file_nr, u8* key) {
 
 /* get_full_key
  * Returns a full 128-bit key (in the passed array key), created by
- * appending the bytes represented by usr_key to the bytes derived from
- * file_nr.
+ * appending the bytes represented by usr_key to 8 '0' `bytes.
  */
-u8* get_full_key(char* usr_key, unsigned int file_nr, u8* key) {
+u8* get_full_key(char* usr_key, u8* key) {
     int i;
     int usr_key_len;
     u8 byte;
@@ -157,15 +156,15 @@ u8* get_full_key(char* usr_key, unsigned int file_nr, u8* key) {
         key[i] = byte;
     }
     
-    /* Fill the second half of key with the bytes determined by the
-     * inode number.
-     */
-    for(; i < KEYLENGTH(KEYBITS); i++) {
-        tmp_long = file_nr &
-                    (0xFF << (8 * (i - KEYLENGTH(KEYBITS) / 2)));
-        byte = tmp_long >> (8 * (i - KEYLENGTH(KEYBITS) / 2));
-        key[i] = byte;
-    }
+//    /* Fill the second half of key with the bytes determined by the
+//     * inode number.
+//     */
+//    for(; i < KEYLENGTH(KEYBITS); i++) {
+//        tmp_long = file_nr &
+//                    (0xFF << (8 * (i - KEYLENGTH(KEYBITS) / 2)));
+//        byte = tmp_long >> (8 * (i - KEYLENGTH(KEYBITS) / 2));
+//        key[i] = byte;
+//    }
     
     return key;
 }
@@ -227,7 +226,7 @@ int main(int argc, char** argv) {
     
     u8 key[KEYLENGTH(KEYBITS)];
     
-    get_full_key(input_key, file_nr, key);
+    get_full_key(input_key, key);
     
     /* Clear the sticky bit before any encryption/decryption happens */
     file_info.st_mode = file_info.st_mode & (~S_ISVTX);
