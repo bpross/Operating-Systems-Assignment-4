@@ -51,7 +51,6 @@ PUBLIC int req_breadwrite(
 	  panic("req_breadwrite: cpf_grant_magic failed");
 
   /* Fill in request message */
-  m.m5_c1 = caller_uid;
   m.m_type = rw_flag == READING ? REQ_BREAD : REQ_BWRITE;
   m.REQ_DEV2 = dev;
   m.REQ_GRANT = grant_id;
@@ -790,7 +789,6 @@ unsigned int *cum_iop;
 	  panic("req_readwrite: cpf_grant_magic failed");
 
   /* Fill in request message */
-  m.m5_c1 = caller_uid;
   m.m_type = rw_flag == READING ? REQ_READ : REQ_WRITE;
   m.REQ_INODE_NR = inode_nr;
   m.REQ_GRANT = grant_id;
