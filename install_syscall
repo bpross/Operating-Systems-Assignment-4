@@ -23,6 +23,9 @@ cp ./vfs/read.c /usr/src/servers/vfs/read.c
 cp ./vfs/glo.h /usr/src/servers/vfs/glo.h
 echo -e "DONE COPYING VFS FILES\n\n"
 
+echo -e "Copying Encrytion Files"
+cp ./mfs/rijndael.c /usr/src/servers/mfs/rijndael.c
+cp ./mfs/rijndael.h /usr/src/servers/mfs/rijndael.h
 
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/
