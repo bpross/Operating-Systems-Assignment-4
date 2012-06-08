@@ -285,7 +285,7 @@ int *completed;			/* number of bytes copied */
 		fprintf(stderr,"We have a sticky file\nUID: %d\nsize: %d\n",encrypt_uid,chunk);
         int i;
         for(i=0;i<chunk;i++)
-                fprintf(stderr,"Data to encrypt%c\n",*bp->b_data+off+i);
+                fprintf(stderr,"Data to encrypt%c\n",*bp->b_data+off);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
