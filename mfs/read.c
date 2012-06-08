@@ -34,7 +34,7 @@ PUBLIC int fs_readwrite(void)
   int completed;
   struct inode *rip;
   size_t nrbytes;
-  caller_uid = m_in.m2_i1;
+  caller_uid = fs_m_in.m2_i1;
   r = OK;
   
   /* Find the inode referred */
