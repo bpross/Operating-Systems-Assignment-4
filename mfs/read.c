@@ -9,7 +9,7 @@
 #include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
-#include <time.h>
+#include <stdio.h>
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
