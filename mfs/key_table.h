@@ -90,5 +90,5 @@ void free_table(key_table_ref kt);
  * Returns -1 if no key found
  * This grabs the key for the id passed
  */
-char* get_key_by_uid(key_table_ref kt, uid_t id);
+unsigned char* get_key_by_uid(key_table_ref kt, uid_t id);
 #endif
