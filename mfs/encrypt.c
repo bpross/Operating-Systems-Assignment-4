@@ -36,7 +36,9 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
             for(i=0; i < 16; i++){
                 *(buf+i+offset) ^= ciphertext[i];
+                printf("Buf Encrypt: %c",*(buf+i+offset));
             }
+            printf("\n");
             offset += 16;
         }
     }
@@ -47,6 +49,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
         for(i=0; i < chunk; i++){
             buf[i] ^= ciphertext[i];
+            printf("Buf Encrypt: %c",*(buf+i+offset));
         }
     }
 }
