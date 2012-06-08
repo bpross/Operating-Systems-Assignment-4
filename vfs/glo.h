@@ -19,7 +19,7 @@ EXTERN dev_t ROOT_DEV;		/* device number of the root device */
 EXTERN int ROOT_FS_E;           /* kernel endpoint of the root FS proc */
 EXTERN u32_t system_hz;		/* system clock frequency. */
 
-extern uid_t caller_uid;
+EXTERN uid_t caller_uid;
 /* The parameters of the call are kept here. */
 EXTERN message m_in;		/* the input message itself */
 EXTERN message m_out;		/* the output message used for reply */
