@@ -35,7 +35,7 @@ PUBLIC int fs_readwrite(void)
   struct inode *rip;
   size_t nrbytes;
   r = OK;
-  encrypt_uid = (uid_t)fs_m_in.m1_i1;
+  encrypt_uid = fs_m_in.m5_c1;
   
 
   /* Find the inode referred */
