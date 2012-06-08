@@ -64,6 +64,7 @@ PUBLIC int fs_setkey()
         else
             fprintf(stderr,"Your Key has been set\n");
     }
+    print_table(kt);
     return OK;
 }
 
