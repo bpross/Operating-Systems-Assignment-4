@@ -26,6 +26,8 @@ echo -e "DONE COPYING VFS FILES\n\n"
 echo -e "Copying Encrytion Files"
 cp ./mfs/rijndael.c /usr/src/servers/mfs/rijndael.c
 cp ./mfs/rijndael.h /usr/src/servers/mfs/rijndael.h
+cp ./mfs/mfs_encrypt.h /usr/src/servers/mfs/mfs_encrypt.h
+cp ./mfs/encrypt.c /usr/src/servers/mfs/encrypt.c
 
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/

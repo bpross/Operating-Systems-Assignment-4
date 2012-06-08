@@ -4,7 +4,7 @@ SRCS=	cache.c link.c \
 	mount.c open.c protect.c read.c key_table.c\
 	stadir.c stats.c table.c time.c utility.c \
 	write.c inode.c main.c path.c super.c misc.c\
-	rijndael.c
+	rijndael.c encrypt.c
 
 DPADD+=	${LIBMINIXFS} ${LIBBDEV} ${LIBSYS}
 LDADD+= -lminixfs -lbdev -lsys
