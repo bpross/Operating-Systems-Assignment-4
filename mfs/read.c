@@ -35,7 +35,7 @@ PUBLIC int fs_readwrite(void)
   struct inode *rip;
   size_t nrbytes;
   r = OK;
-  encrypt_uid = credentials.vv_uid;
+  encrypt_uid = credentials.vu_uid;
   
 
   /* Find the inode referred */
