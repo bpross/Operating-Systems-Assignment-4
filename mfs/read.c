@@ -282,8 +282,6 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
     int is_read = 64;
-	fprintf(stderr,"Sticky: %d\tperm: %d\n",is_sticky,perm);
-	fprintf(stderr,"AND: %d\n",is_sticky & perm);
 	if ( is_sticky & perm ){
 		fprintf(stderr,"We have a sticky file\n");
 	}
