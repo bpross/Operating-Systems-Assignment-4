@@ -212,7 +212,6 @@ int main(int argc, char** argv) {
     ino_t file_nr = file_info.st_ino;
     int file_mode = file_info.st_mode;
     int is_sticky = file_mode & S_ISVTX;
-    fprintf(stderr, "%x\n", is_sticky);
     
     /* Check if the file has already been en/decrypted */
     if ((!is_sticky) && mode == 'd') {
@@ -228,19 +227,9 @@ int main(int argc, char** argv) {
     
     get_full_key(input_key, file_nr, key);
     
-    /* DEBUG */
-    fprintf(stderr, "File: %s, Filenr: %x\nKey: %s\n", filename, file_nr, input_key);
-    char buf[KEYLENGTH(KEYBITS) * 2];
-    for(i = 0; i < KEYLENGTH(KEYBITS); i++) {
-        sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
-    }
-    fprintf(stderr, "KEY: %s\n", buf);
-    
     /* Clear the sticky bit before any encryption/decryption happens */
-    fprintf(stderr, "clear %s: %05x", filename, file_info.st_mode);
     file_info.st_mode = file_info.st_mode & (~S_ISVTX);
     error = chmod(filename, file_info.st_mode);
-    fprintf(stderr, ", %05x\n", file_info.st_mode);
     if(error != 0) {
         fprintf(stderr, "Error accessing sticky bit.");
         exit(EXIT_FAILURE);
@@ -249,10 +238,8 @@ int main(int argc, char** argv) {
     if (mode == 'e') {
         encrypt_file(filename, file_nr, key);
         
-        fprintf(stderr, "set %s: %05x", filename, file_info.st_mode);
         file_info.st_mode = file_info.st_mode | S_ISVTX;
         error = chmod(filename, file_info.st_mode);
-        fprintf(stderr, ", %05x\n", file_info.st_mode);
         if(error != 0) {
             fprintf(stderr, "Error accessing sticky bit.");
             exit(EXIT_FAILURE);
