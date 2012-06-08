@@ -18,6 +18,5 @@ size_t nbytes;
   m.m1_i1 = fd;
   m.m1_i2 = nbytes;
   m.m1_p1 = (char *) buffer;
-  m.m2_i1 = getuid();
   return(_syscall(VFS_PROC_NR, READ, &m));
 }
