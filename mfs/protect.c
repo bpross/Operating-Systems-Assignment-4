@@ -2,6 +2,7 @@
 #include "inode.h"
 #include "super.h"
 #include <minix/vfsif.h>
+#include <string.h>
 
 FORWARD _PROTOTYPE( int in_group, (gid_t grp)				);
 

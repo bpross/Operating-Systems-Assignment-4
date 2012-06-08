@@ -93,7 +93,7 @@ void print_table (key_table_ref kt)
 }
 
 /* add_to_table */
-int add_to_table(key_table_ref kt, uid_t userid, char* key)
+int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
 {
     if(table_full(kt))
         /* Table is full. Cannot add to full table */

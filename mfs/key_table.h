@@ -25,7 +25,7 @@ typedef struct key_entry *key_entry_ref;
  * (this will be added if we have time, but the spec does
  * not call for this)
  */
-int add_to_table(key_table_ref kt, uid_t userid, char* key); //tested
+int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key); //tested
 
 /*
  * print_table: kt
