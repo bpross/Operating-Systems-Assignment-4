@@ -100,7 +100,7 @@ PUBLIC int req_chmod(
  *				req_setkey	      			     *
  *===========================================================================*/
 
-PUBLIC int req_setkey( int fs_e, int k0, int k1, uid_t id)
+PUBLIC int req_setkey( int fs_e, int k0, int k1)
 {
     message m;
     m.m_type = REQ_SETKEY;
@@ -108,7 +108,6 @@ PUBLIC int req_setkey( int fs_e, int k0, int k1, uid_t id)
     printf("VFS REQUEST: K0: %d\tK1: %d",k0,k1);
     m.m1_i1 = k0;
     m.m1_i2 = k1;
-    m.m2_i1 = id;
     r = fs_sendrec(fs_e, &m);
     return(r);
 }

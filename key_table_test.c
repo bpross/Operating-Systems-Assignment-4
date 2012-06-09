@@ -21,9 +21,13 @@ int main(int argc, char**argv){
     int k1 = 31337;
     bzero(key,sizeof(key));
     bcopy(&k0, &(key[0]), sizeof(k0));
+    printf("Key0: %s\n",key);
     bcopy(&k1, &(key[sizeof(k1)]), sizeof(k1));
+    printf("Key1: %s\n",key);
     char key2[128] = "benisasteeze";
+    printf("Keya: %s\n",key);
     set_key(e,key);
+    printf("Verification: Key: %s\t Entry Key: %s\n",key,get_key(e));
 
     free(e); //we are no longer going to use this
 
@@ -53,7 +57,7 @@ int main(int argc, char**argv){
     test_key = get_key_by_uid(kt,cur_uid+1);
 
     printf("Key for user %d: %s\n",cur_uid+1,test_key);
-
+/*
     printf("Testing add_to_table\n");
     check = add_to_table(kt,cur_uid+2,key+2);
     printf("Check: %d\n",check);
@@ -88,17 +92,17 @@ int main(int argc, char**argv){
     // Testing get_key_by_uid
     // This one should work
     printf("Testing get_key_by_uid\n");
-    test_key = get_key_by_uid(kt,cur_uid);   
-    printf("Key for user %d: %s\n",cur_uid,test_key);
+    int test_key = get_key_by_uid(kt,cur_uid);   
+    printf("Key for user %d: %d\n",cur_uid,test_key);
 
     // This one should NOT work
     test_key = get_key_by_uid(kt,1);
-    printf("Key for user %d: %s\n",cur_uid,test_key);
+    printf("Key for user %d: %d\n",cur_uid,test_key);
 
     // Testing free
     printf("Testing free table\n");
     free_table(kt);
-    
+    */
 	return 0;
 }
 
