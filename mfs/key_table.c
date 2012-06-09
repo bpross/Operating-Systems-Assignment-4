@@ -10,9 +10,9 @@
 //#include "fs.h"
 #include "key_table.h"
 
-#define UID( _kt, _i ) (kt)[(_i)][0]
-#define K0( _kt, _i ) (kt)[(_i)][1]
-#define K1( _kt, _i ) (kt)[(_i)][2]
+#define UID( _kt, _i ) ((kt)[(_i)][0])
+#define K0( _kt, _i ) ((kt)[(_i)][1])
+#define K1( _kt, _i ) ((kt)[(_i)][2])
 
 u32 **key_table;
 
@@ -65,12 +65,13 @@ int set_key (key_table_ref kt, int u_index, u32 k0, u32 k1)
 }
 
 /* get_key */
-unsigned char * get_key(key_table_ref kt, int u_index)
+u8* get_key(key_table_ref kt, u8* key, int u_index)
 {
-    char key[128];
-    memset(&key, 0, 64);
-    bcopy(&K0(kt, u_index), &key + 64, 32);
-    bcopy(&K1(kt, u_index), &key + 64 + 32, 32);
+    u32 k0 = K0(kt, u_index);
+    u32 k1 = K1(kt, u_index);
+    memset(&key, 0, 16);
+    bcopy (&k0, &(key[0]), sizeof (k0));
+    bcopy (&k1, &(key[sizeof(k0)]), sizeof (k1));
     return key;
 }
 
