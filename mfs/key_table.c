@@ -20,7 +20,7 @@
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
-    unsigned char *key;
+    unsigned int key;
 };
 
 struct key_table {
@@ -68,7 +68,7 @@ PUBLIC uid_t get_uid(key_entry_ref e)
 }
 
 /* set_key */
-PUBLIC key_entry_ref set_key (key_entry_ref e, unsigned char* key)
+PUBLIC key_entry_ref set_key (key_entry_ref e, unsigned int key)
 {
 
     e->key = key;
@@ -76,7 +76,7 @@ PUBLIC key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 }
 
 /* get_key */
-PUBLIC unsigned char * get_key(key_entry_ref e)
+PUBLIC int get_key(key_entry_ref e)
 {
     return e->key;
 }
@@ -101,14 +101,14 @@ PUBLIC void print_table (key_table_ref kt)
 }
 
 /* add_to_table */
-PUBLIC int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
+PUBLIC int add_to_table(key_table_ref kt, uid_t userid, int key)
 {
     if(table_full(kt))
         /* Table is full. Cannot add to full table */
         return -1;
     else 
     {
-        unsigned char * u_key = get_key_by_uid(kt,userid);
+        int u_key = get_key_by_uid(kt,userid);
         if ( u_key != NULL )
         {
             int i;
@@ -128,13 +128,13 @@ PUBLIC int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
     }
 }
 
-PUBLIC unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
+PUBLIC int get_key_by_uid(key_table_ref kt, uid_t id)
 {
     int i;
     printf("UID to look for: %d\n",id);
     for(i = 0;i<kt->entries;i++)
     {
-        printf("Key: %s\n",get_key(kt->keys[i]));
+        printf("Key: %d\n",get_key(kt->keys[i]));
         if(get_uid(kt->keys[i]) == id)
             return get_key(kt->keys[i]);
     }

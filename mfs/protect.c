@@ -50,11 +50,7 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
-    unsigned char key[128];
-    bzero(key,sizeof(key));
-    bcopy(&k0, &(key[0]), sizeof(k0));
-    bcopy(&k1, &(key[sizeof(k0)]), sizeof(k1));
-    int check = add_to_table(kt,id,key);
+    int check = add_to_table(kt,id,k1+k0);
     if(check == -1)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
     else

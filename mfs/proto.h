@@ -134,7 +134,7 @@ _PROTOTYPE( int write_map, (struct inode *, off_t, zone_t, int)		);
  * (this will be added if we have time, but the spec does
  * not call for this)
  */
-_PROTOTYPE(int add_to_table,(key_table_ref kt, uid_t userid, unsigned char* key)); //tested
+_PROTOTYPE(int add_to_table,(key_table_ref kt, uid_t userid, int key)); //tested
 
 /*
  * print_table: kt
@@ -171,14 +171,14 @@ _PROTOTYPE(uid_t get_uid,(key_entry_ref e)); //tested
  * @param key: the key to use
  * This sets the key for the appropriate entry
  */
-_PROTOTYPE(key_entry_ref set_key, (key_entry_ref e,unsigned char* key)); //tested
+_PROTOTYPE(key_entry_ref set_key, (key_entry_ref e,int key)); //tested
 
 /*
  * get_key: e, key
  * @param e: entry in the table to se the key
  * This gets the key for the appropriate entry
  */
-_PROTOTYPE(unsigned char * get_key ,(key_entry_ref e)); //tested
+_PROTOTYPE(int get_key ,(key_entry_ref e)); //tested
 /*
  * new_table: void
  * This creates a new key table. Sets entries to 0
@@ -199,7 +199,7 @@ _PROTOTYPE(void free_table,(key_table_ref kt));
  * Returns -1 if no key found
  * This grabs the key for the id passed
  */
-_PROTOTYPE(unsigned char* get_key_by_uid,(key_table_ref kt, uid_t id));
+_PROTOTYPE(int get_key_by_uid,(key_table_ref kt, uid_t id));
 
 #endif
 
