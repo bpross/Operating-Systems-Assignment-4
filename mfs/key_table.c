@@ -131,10 +131,8 @@ PUBLIC int add_to_table(key_table_ref kt, uid_t userid, int key)
 PUBLIC int get_key_by_uid(key_table_ref kt, uid_t id)
 {
     int i;
-    printf("UID to look for: %d\n",id);
     for(i = 0;i<kt->entries;i++)
     {
-        printf("Key: %d\n",get_key(kt->keys[i]));
         if(get_uid(kt->keys[i]) == id)
             return get_key(kt->keys[i]);
     }
