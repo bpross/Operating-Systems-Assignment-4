@@ -134,7 +134,7 @@ _PROTOTYPE( int write_map, (struct inode *, off_t, zone_t, int)		);
  * (this will be added if we have time, but the spec does
  * not call for this)
  */
-_PROTOTYPE(int add_to_table,(key_table_ref kt, uid_t userid, int key)); //tested
+_PROTOTYPE(int add_to_table,(key_table_ref kt, uid_t userid, u32 k0, u32 k1)); //tested
 
 /*
  * print_table: kt
@@ -158,27 +158,27 @@ _PROTOTYPE(int table_full, (key_table_ref kt)); //tested
  * @param uid: the userid to use
  * This sets the userid for the appropriate entry
  */
-_PROTOTYPE(key_entry_ref set_uid, (key_entry_ref e, uid_t uid)); //tested
+_PROTOTYPE(int set_uid, (key_table_ref kt, int u_index, uid_t uid)); //tested
 /*
  * get_uid: e
  * @param e: entry in the table to set the userid
  * This gets the userid for the appropriate entry
  */
-_PROTOTYPE(uid_t get_uid,(key_entry_ref e)); //tested
+_PROTOTYPE(uid_t get_uid,(key_table_ref kt, int u_index)); //tested
 /*
  * set_key: e, key
  * @param e: entry in the table to se the key
  * @param key: the key to use
  * This sets the key for the appropriate entry
  */
-_PROTOTYPE(key_entry_ref set_key, (key_entry_ref e,int key)); //tested
+_PROTOTYPE(int set_key, (key_table_ref kt, int u_index, u32 k0, u32 k1)); //tested
 
 /*
  * get_key: e, key
  * @param e: entry in the table to se the key
  * This gets the key for the appropriate entry
  */
-_PROTOTYPE(int get_key ,(key_entry_ref e)); //tested
+_PROTOTYPE(u8* get_key ,(key_table_ref kt, u8* key, int u_index)); //tested
 /*
  * new_table: void
  * This creates a new key table. Sets entries to 0
@@ -199,7 +199,7 @@ _PROTOTYPE(void free_table,(key_table_ref kt));
  * Returns -1 if no key found
  * This grabs the key for the id passed
  */
-_PROTOTYPE(int get_key_by_uid,(key_table_ref kt, uid_t id));
+_PROTOTYPE(char* get_key_by_uid,(key_table_ref kt, uid_t id));
 
 #endif
 
