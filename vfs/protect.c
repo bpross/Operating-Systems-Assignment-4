@@ -24,7 +24,6 @@ PUBLIC int do_setkey()
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
     int r;
-    printf("Passing K0: %d\t K1: %d\n",k0,k1);
     r = req_setkey(73134,k0,k1);
 
     return(r);
