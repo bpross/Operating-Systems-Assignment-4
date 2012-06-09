@@ -54,5 +54,5 @@ int remove_from_table(key_table_ref kt, uid_t userid);
 /* add_to_table */
 int add_to_table(key_table_ref kt, uid_t userid, u32 k0, u32 k1);
 
-unsigned char* get_key_by_uid(key_table_ref kt, uid_t id, u8* key);
+u8* get_key_by_uid(key_table_ref kt, uid_t id, u8* key);
 #endif
