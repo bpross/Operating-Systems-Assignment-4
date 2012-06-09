@@ -14,14 +14,7 @@
 #define K0( _i ) key_table[1][_i]
 #define K1( _i ) key_table[2][_i]
 
-/* Struct Definitions */
-struct key_entry{
-    uid_t userid;
-    u32 k0;
-    u32 k1;
-};
-
-int key_table[3][MAX_KEY];
+u32 **key_table;
 
 /* new_table */
 key_table_ref new_table(void)

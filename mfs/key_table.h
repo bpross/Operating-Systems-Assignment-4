@@ -14,8 +14,8 @@
 
 typedef unsigned long u32;
 
-typedef struct key_entry *key_entry_ref;
-typedef struct key_entry *key_table_ref;
+//typedef struct key_entry *key_entry_ref;
+typedef u32 **key_table_ref;
 
 /*
  * add_to_table: kt, userid, key
