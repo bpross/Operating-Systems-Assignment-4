@@ -7,9 +7,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-//#include "fs.h"
+#include "fs.h"
 #include "key_table.h"
-
+#include <stddef.h>
+#include <string.h>
+#include <minix/com.h>
+#include <minix/u64.h>
+#include "buf.h"
+#include "inode.h"
+#include "super.h"
+#include <minix/vfsif.h>
+#
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
