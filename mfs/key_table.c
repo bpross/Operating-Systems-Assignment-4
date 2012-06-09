@@ -65,7 +65,7 @@ int set_key (key_table_ref kt, int u_index, u32 k0, u32 k1)
 }
 
 /* get_key */
-u8* get_key(key_table_ref kt, u8* key, int u_index)
+u8* get_key(key_table_ref kt, int u_index, u8* key)
 {
     u32 k0 = K0(kt, u_index);
     u32 k1 = K1(kt, u_index);
@@ -140,40 +140,26 @@ int add_to_table(key_table_ref kt, uid_t userid, u32 k0, u32 k1)
         return -1;
     else 
     {
-        unsigned char * u_key = get_key_by_uid(kt,userid);
-        if ( u_key != NULL )
+        int i;
+        for(i = 0; i < MAX_KEY; i++)
         {
-            int i;
-            for(i = 0;i<MAX_KEY;i++)
-            {
-                if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == userid)
-                    kt->keys[i] = set_key(kt->keys[i],key);
-            } 
-            printf("Key Updated\n");
-        }
-        else {
-            for(i = 0;i<MAX_KEY;i++)
-            {
-                if(kt->keys[i] == NULL)
-                {
-                    kt->keys[i] = set_uid(kt->keys[kt->entries],userid);
-                    kt->keys[i] = set_key(kt->keys[kt->entries],key);
-                    kt->entries++;
-                    break;
-                }
+            if(get_uid(kt, i) == userid || is_empty(kt, i)) {
+                UID(kt, i) = userid;
+                K0(kt, i) = k0;
+                K1(kt, i) = k1;
             }
         }
         return 1;
     }
 }
 
-unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
+u8* get_key_by_uid(key_table_ref kt, uid_t userid, u8* key)
 {
     int i;
-    for(i = 0;i<kt->entries;i++)
+    for(i = 0; i < MAX_KEY; i++)
     {
-        if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == id)
-            return get_key(kt->keys[i]);
+        if(!is_empty(kt, i) && get_uid(kt, i) == userid)
+            return get_key(kt, i, key);
     }
     //not found
     return NULL;

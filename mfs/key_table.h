@@ -35,7 +35,7 @@ uid_t get_uid(key_table_ref kt, int u_index);
 int set_key (key_table_ref kt, int u_index, u32 k0, u32 k1);
 
 /* get_key */
-u8* get_key(key_table_ref kt, u8* key, int u_index);
+u8* get_key(key_table_ref kt, int u_index, u8* key);
 
 /* is_empty */
 int is_empty (key_table_ref kt, int i);
@@ -54,5 +54,5 @@ int remove_from_table(key_table_ref kt, uid_t userid);
 /* add_to_table */
 int add_to_table(key_table_ref kt, uid_t userid, u32 k0, u32 k1);
 
-unsigned char* get_key_by_uid(key_table_ref kt, uid_t id);
+unsigned char* get_key_by_uid(key_table_ref kt, uid_t id, u8* key);
 #endif
