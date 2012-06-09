@@ -50,7 +50,7 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
-    int check = add_to_table(kt,id,k1+k0);
+    int check = add_to_table(kt,id,k0,k1);
     if(check == -1)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
     else

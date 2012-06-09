@@ -91,7 +91,7 @@ int table_full (key_table_ref kt)
 }
 
 /* print_table */
-void print_table (key_table_ref kt)
+void print_table (u32 kt)
 {
     int i;
     for(i=0;i<MAX_KEY;++i)
