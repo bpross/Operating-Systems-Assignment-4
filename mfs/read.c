@@ -22,7 +22,7 @@ FORWARD _PROTOTYPE( int rw_chunk, (struct inode *rip, u64_t position,
 
 PRIVATE char getdents_buf[GETDENTS_BUFSIZ];
 
-EXTERN int kt[MAX_KEY][3];
+int kt[MAX_KEY][3];
 /*===========================================================================*
  *				fs_readwrite				     *
  *===========================================================================*/
