@@ -76,7 +76,6 @@ PUBLIC int main(int argc, char *argv[])
 	}
 	reply(src, &fs_m_out);
   }
-  free_table(kt);
   return(OK);
 }
 
