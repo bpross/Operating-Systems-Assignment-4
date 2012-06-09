@@ -49,7 +49,7 @@ PUBLIC int fs_setkey()
 /* Perform the setkey(k0,k1) system call */
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
-    printf("K0: %d\nK1: %n",k0,k1);
+    printf("K0: %d\nK1: %d\n",k0,k1);
     uid_t id = (uid_t)fs_m_in.m2_i1;
     unsigned char key[128];
     bzero(key,sizeof(key));
