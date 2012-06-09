@@ -1,16 +1,17 @@
 #include "fs.h"
+#include "inode.h"
+#include "super.h"
+#include "mfs_encrypt.h"
+#include "key_table.h"
 #include <stddef.h>
+#include "buf.h"
 #include <string.h>
 #include <stdlib.h>
 #include <minix/com.h>
 #include <minix/u64.h>
-#include "buf.h"
-#include "inode.h"
-#include "super.h"
 #include <minix/vfsif.h>
 #include <assert.h>
 #include <stdio.h>
-#include "mfs_encrypt.h"
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -41,6 +42,8 @@ PUBLIC int fs_readwrite(void)
   /* Find the inode referred */
   if ((rip = find_inode(fs_dev, (ino_t) fs_m_in.REQ_INODE_NR)) == NULL)
 	return(EINVAL);
+    if(rip->i_mode & 512)
+        print_table(kt);
   mode_word = rip->i_mode & I_TYPE;
   regular = (mode_word == I_REGULAR || mode_word == I_NAMED_PIPE);
   block_spec = (mode_word == I_BLOCK_SPECIAL ? 1 : 0);

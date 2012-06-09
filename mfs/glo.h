@@ -43,7 +43,8 @@ EXTERN char fs_dev_label[16];	/* Name of the device driver that is handled
 EXTERN int unmountdone;
 EXTERN int exitsignaled;
 
-EXTERN key_table_ref kt;
+/* setkey */
+EXTERN u32 key_table[3][MAX_KEY];
 /* our block size. */
 EXTERN unsigned int fs_block_size;
 

@@ -10,7 +10,9 @@
 //#include "fs.h"
 #include "key_table.h"
 
-typedef unsigned long u32;
+#define UID( _i ) key_table[0][_i]
+#define K0( _i ) key_table[1][_i]
+#define K1( _i ) key_table[2][_i]
 
 /* Struct Definitions */
 struct key_entry{
@@ -19,7 +21,7 @@ struct key_entry{
     u32 k1;
 };
 
-struct key_entry key_table[MAX_KEY];
+int key_table[3][MAX_KEY];
 
 /* new_table */
 key_table_ref new_table(void)
