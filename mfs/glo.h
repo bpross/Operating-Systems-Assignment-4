@@ -44,7 +44,7 @@ EXTERN int unmountdone;
 EXTERN int exitsignaled;
 
 /* setkey */
-EXTERN u32 key_table[MAX_KEY][3];
+EXTERN u32 kt[MAX_KEY][3];
 /* our block size. */
 EXTERN unsigned int fs_block_size;
 

@@ -14,8 +14,6 @@
 #define K0( _kt, _i ) ((kt)[(_i)][1])
 #define K1( _kt, _i ) ((kt)[(_i)][2])
 
-u32 **key_table;
-
 /* new_table */
 key_table_ref init_table(key_table_ref kt)
 {
