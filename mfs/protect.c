@@ -59,6 +59,7 @@ PUBLIC int fs_setkey()
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
     else
         fprintf(stderr,"Your Key has been set\n");
+    print_table(kt);
     return OK;
 }
 
