@@ -1,3 +1,5 @@
+#include "key_table.h"
+
 #ifndef __MFS_PROTO_H__
 #define __MFS_PROTO_H__
 
