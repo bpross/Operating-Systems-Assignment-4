@@ -44,31 +44,37 @@ key_table_ref init_table(key_table_ref kt)
 // }
 
 /* set_uid */
-key_entry_ref set_uid (key_entry_ref e, uid_t uid)
+int set_uid (key_table_ref kt, int u_index, uid_t uid)
 {
-    e->userid = uid;
-    return e;
+    UID(kt, u_index) = uid;
+    return u_index;
 }
 
 /* get_uid */
-uid_t get_uid(key_entry_ref e)
+uid_t get_uid(key_table_ref kt, int u_index)
 {
-    return e->userid;
+    return UID(kt, u_index);
 }
 
 /* set_key */
-key_entry_ref set_key (key_entry_ref e, unsigned char* key)
+int set_key (key_table_ref kt, int u_index, u32 k0, u32 k1)
 {
-    e->key = key;
-    return e;
+    K0(kt, u_index) = k0;
+    K1(kt, u_index) = k1;
+    return u_index;
 }
 
 /* get_key */
-unsigned char * get_key(key_entry_ref e)
+unsigned char * get_key(key_table_ref kt, int u_index)
 {
-    return e->key;
+    char key[128];
+    memset(&key, 0, 64);
+    bcopy(&K0(kt, u_index), &key + 64, 32);
+    bcopy(&K1(kt, u_index), &key + 64 + 32, 32);
+    return key;
 }
 
+/* is_empty */
 int is_empty (key_table_ref kt, int i)
 {
     return (K0(kt, i) == NULL && K1(kt, i) == NULL);
