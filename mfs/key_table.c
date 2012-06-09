@@ -98,7 +98,7 @@ void print_table (key_table_ref kt)
     for(i=0;i<MAX_KEY;++i)
     {
         printf("%d:\tuid: %d\tk0: %80x\tk1: %80x\n",
-                i,UID(kt,i),K0(kt,i), K!(kt,i));
+                i,UID(kt,i),K0(kt,i), K1(kt,i));
     }
 }
 
