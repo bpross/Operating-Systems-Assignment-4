@@ -283,10 +283,7 @@ int *completed;			/* number of bytes copied */
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
 		fprintf(stderr,"Read UID: %d\n",encrypt_uid);
-        if (kt == NULL)
-            printf("KT is NULL\n");
-        unsigned char * testkey = get_key_by_uid(kt,encrypt_uid);
-        printf("Key is: %s\n",testkey);
+        print_table(kt);
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
@@ -301,6 +298,7 @@ int *completed;			/* number of bytes copied */
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
 		fprintf(stderr,"Write\n");
+        print_table(kt);
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
     r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
