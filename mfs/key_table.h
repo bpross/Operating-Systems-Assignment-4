@@ -16,7 +16,7 @@ typedef unsigned int u32;
 typedef unsigned char u8;
 
 //typedef struct key_entry *key_entry_ref;
-typedef u32 key_table_ref[MAX_KEY][3];
+typedef u32 key_table_ref[8][3];
 
 
 /* new_table */
