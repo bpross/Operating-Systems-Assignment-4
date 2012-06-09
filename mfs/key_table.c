@@ -121,7 +121,7 @@ int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
     }
 }
 
-unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
+PUBLIC unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
 {
     int i;
     printf("UID to look for: %d\n",id);
