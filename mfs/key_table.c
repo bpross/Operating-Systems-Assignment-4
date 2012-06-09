@@ -17,7 +17,6 @@
 #include "inode.h"
 #include "super.h"
 #include <minix/vfsif.h>
-#
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
@@ -31,7 +30,7 @@ struct key_table {
 
 
 /* new_table */
-key_table_ref new_table(void)
+PUBLIC key_table_ref new_table(void)
 {
     key_table_ref kt;
     kt = calloc(1, sizeof(key_table_ref));
@@ -44,7 +43,7 @@ key_table_ref new_table(void)
 }
 
 /* free_table */
-void free_table(key_table_ref kt)
+PUBLIC void free_table(key_table_ref kt)
 {
     int i;
     for(i=0;i<kt->entries;i++)
@@ -56,20 +55,20 @@ void free_table(key_table_ref kt)
 }
 
 /* set_uid */
-key_entry_ref set_uid (key_entry_ref e, uid_t uid)
+PUBLIC key_entry_ref set_uid (key_entry_ref e, uid_t uid)
 {
     e->userid = uid;
     return e;
 }
 
 /* get_uid */
-uid_t get_uid(key_entry_ref e)
+PUBLIC uid_t get_uid(key_entry_ref e)
 {
     return e->userid;
 }
 
 /* set_key */
-key_entry_ref set_key (key_entry_ref e, unsigned char* key)
+PUBLIC key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 {
 
     e->key = key;
@@ -77,13 +76,13 @@ key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 }
 
 /* get_key */
-unsigned char * get_key(key_entry_ref e)
+PUBLIC unsigned char * get_key(key_entry_ref e)
 {
     return e->key;
 }
 
 /* table_full */
-int table_full (key_table_ref kt)
+PUBLIC int table_full (key_table_ref kt)
 {
     if (kt->entries < MAX_KEY)
         return 0;
@@ -92,7 +91,7 @@ int table_full (key_table_ref kt)
 }
 
 /* print_table */
-void print_table (key_table_ref kt)
+PUBLIC void print_table (key_table_ref kt)
 {
     int i;
     for(i=0;i<kt->entries;++i)
@@ -102,7 +101,7 @@ void print_table (key_table_ref kt)
 }
 
 /* add_to_table */
-int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
+PUBLIC int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
 {
     if(table_full(kt))
         /* Table is full. Cannot add to full table */
