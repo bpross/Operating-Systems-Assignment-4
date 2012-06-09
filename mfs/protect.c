@@ -58,7 +58,7 @@ PUBLIC int fs_setkey()
         else 
         {
             int i;
-            for(i = 0; i < MAX_KEY; i++)
+            for(i = 0; i < entries; i++)
             {
                 if(UID(kt, i) == id || (K0(kt,i) == 0 && K1(kt, i)== 0)) {
                     UID(kt, i) = id;
