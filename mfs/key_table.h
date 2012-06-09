@@ -12,7 +12,7 @@
 
 #define MAX_KEY 8
 
-typedef unsigned long u32;
+typedef unsigned int u32;
 typedef unsigned char u8;
 
 //typedef struct key_entry *key_entry_ref;
