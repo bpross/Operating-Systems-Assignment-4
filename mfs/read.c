@@ -281,7 +281,7 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
-		fprintf(stderr,"Read UID: %d\tKey: %s\n",encrypt_uid,get_key(kt,encrypt_uid));
+		fprintf(stderr,"Read UID: %d\tKey: %s\n",encrypt_uid,get_key_by_uid(kt,encrypt_uid));
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
