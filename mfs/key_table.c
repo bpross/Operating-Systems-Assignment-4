@@ -68,8 +68,8 @@ u8* get_key(key_table_ref kt, int u_index, u8* key)
     u32 k0 = K0(kt, u_index);
     u32 k1 = K1(kt, u_index);
     memset(&key, 0, 16);
-    bcopy (&k0, &(key[0]), sizeof (k0));
-    bcopy (&k1, &(key[sizeof(k0)]), sizeof (k1));
+    bcopy (&k0, &(key[0]), sizeof (k0) * 8);
+    bcopy (&k1, &(key[sizeof(k0)*8]), sizeof (k1)*8);
     return key;
 }
 
