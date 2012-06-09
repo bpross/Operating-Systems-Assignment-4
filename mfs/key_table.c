@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-//#include "fs.h"
+#include "fs.h"
 #include "key_table.h"
 
 #define UID( _kt, _i ) ((kt)[(_i)][0])
@@ -15,17 +15,17 @@
 #define K1( _kt, _i ) ((kt)[(_i)][2])
 
 /* new_table */
-key_table_ref init_table(key_table_ref kt)
+key_table_ref init_table()
 {
-    
+    key_table_ref kt;
     int i;
     for(i=0;i<MAX_KEY;i++)
     {
+        UID(kt,i) = -1;
         K0(kt, i) = 0;
         K1(kt, i) = 0;
     }
     
-    kt = key_table;
     return(kt);
 }
 
@@ -63,20 +63,21 @@ int set_key (key_table_ref kt, int u_index, u32 k0, u32 k1)
 }
 
 /* get_key */
-u8* get_key(key_table_ref kt, int u_index, u8* key)
+/*u8* get_key(key_table_ref kt, int u_index, u8* key)
 {
     u32 k0 = K0(kt, u_index);
     u32 k1 = K1(kt, u_index);
-    memset(&key, 0, 16);
+    memset(&key, 0, sizeof(key));
     bcopy (&k0, &(key[0]), sizeof (k0) * 8);
     bcopy (&k1, &(key[sizeof(k0)*8]), sizeof (k1)*8);
     return key;
 }
+*/
 
 /* is_empty */
 int is_empty (key_table_ref kt, int i)
 {
-    return (K0(kt, i) == NULL && K1(kt, i) == NULL);
+    return (K0(kt, i) == 0 && K1(kt, i) == 0);
 }
 
 /* table_full */
@@ -84,20 +85,20 @@ int table_full (key_table_ref kt)
 {
     int i;
     for (i = 0; i < MAX_KEY; i++) {
-        if (is_empty (i))
+        if (is_empty (kt,i))
             return 0;
     }
     return 1;
 }
 
 /* print_table */
-void print_table (u32 kt)
+void print_table (key_table_ref kt)
 {
     int i;
     for(i=0;i<MAX_KEY;++i)
     {
         printf("%d:\tuid: %d\tk0: %80x\tk1: %80x\n",
-                    i,UID(kt,i),K0(kt,i), K!(kt,i));
+                i,UID(kt,i),K0(kt,i), K!(kt,i));
     }
 }
 
@@ -116,12 +117,14 @@ int has_key(key_table_ref kt, uid_t userid)
 /* remove_from_table */
 int remove_from_table(key_table_ref kt, uid_t userid)
 {
+    int i;
     for(i = 0;i<MAX_KEY;i++)
     {
-        if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == userid)
+        if(UID(kt,i) != -1 && get_uid(kt,i) == userid)
         {
-            kt->keys[i] = NULL;
-            kt->entries--;
+            UID(kt,i) = -1;
+            K0(kt,i) = 0;
+            K1(kt,i) = 0;
             printf ("Key deleted\n");
             return 1;
         }
@@ -160,5 +163,5 @@ u8* get_key_by_uid(key_table_ref kt, uid_t userid, u8* key)
             return get_key(kt, i, key);
     }
     //not found
-    return NULL;
+    return -1;
 }
