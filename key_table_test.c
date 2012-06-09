@@ -47,11 +47,6 @@ int main(int argc, char**argv){
     print_table(kt);
     // Going to fill up the table
     
-    printf("Testing add_to_table\n");
-    check = add_to_table(kt,cur_uid,key2);
-    printf("Check: %d\n",check);
-    print_table(kt);
-
     char * test_key = get_key_by_uid(kt,cur_uid);   
     printf("Key for user %d: %s\n",cur_uid,test_key);
     test_key = get_key_by_uid(kt,cur_uid+1);

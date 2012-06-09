@@ -64,7 +64,6 @@ uid_t get_uid(key_entry_ref e)
 key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 {
 
-    printf("Key: %s\n",key);
     e->key = key;
     return e;
 }
@@ -128,6 +127,7 @@ unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
     printf("UID to look for: %d\n",id);
     for(i = 0;i<kt->entries;i++)
     {
+        printf("Key: %s\n",get_key(kt->keys[i]));
         if(get_uid(kt->keys[i]) == id)
             return get_key(kt->keys[i]);
     }
