@@ -61,7 +61,6 @@ PUBLIC int fs_setkey()
                 UID(kt,0) = id;
                 K0(kt,0) = k0;
                 K1(kt,0) = k1;
-                entries++;
                 check = 1;
             }
             else
@@ -73,11 +72,11 @@ PUBLIC int fs_setkey()
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
-                        entries++;
                     }
                 }
                 check = 1;
             }
+            entries++;
         }
     }
     else
@@ -92,10 +91,10 @@ PUBLIC int fs_setkey()
                 K1(kt,i) = 0;
                 entries--;
                 printf ("Key deleted\n");
-                check = -1;
+                check = -2;
             }
         }
-        if (check != -1)
+        if (check != -2)
             printf("You cannot delete a non-existing key\n");
     }
 
