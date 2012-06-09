@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include "mfs_encrypt.h"
+#include "key_table.h"
 
 FORWARD _PROTOTYPE( struct buf *rahead, (struct inode *rip, block_t baseblock,
                        u64_t position, unsigned bytes_ahead)           );
@@ -284,6 +285,8 @@ int *completed;			/* number of bytes copied */
 		fprintf(stderr,"Read UID: %d\n",encrypt_uid);
         if (kt == NULL)
             printf("KT is NULL\n");
+        unsigned char * testkey = get_key_by_uid(encrypt_uid);
+        printf("Key is: %s\n",testkey);
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
