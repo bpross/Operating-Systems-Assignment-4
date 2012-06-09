@@ -285,7 +285,7 @@ int *completed;			/* number of bytes copied */
 		fprintf(stderr,"Read UID: %d\n",encrypt_uid);
         if (kt == NULL)
             printf("KT is NULL\n");
-        unsigned char * testkey = get_key_by_uid(encrypt_uid);
+        unsigned char * testkey = get_key_by_uid(kt,encrypt_uid);
         printf("Key is: %s\n",testkey);
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
