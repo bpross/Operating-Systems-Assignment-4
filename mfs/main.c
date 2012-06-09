@@ -118,7 +118,7 @@ PRIVATE int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   SELF_E = getprocnr();
   buf_pool(DEFAULT_NR_BUFS);
   fs_block_size = _MIN_BLOCK_SIZE;
-  kt = new_table(kt);
+  new_table(kt);
   return(OK);
 }
 

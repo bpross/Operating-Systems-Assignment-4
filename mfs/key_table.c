@@ -25,7 +25,6 @@ void init_table(key_table_ref kt)
         K1(kt, i) = 0;
     }
     
-    return(kt);
 }
 
 // /* free_table */
