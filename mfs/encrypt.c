@@ -16,7 +16,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     int k1 = -1;
     int i;
     for(i=0;i<entries;i++){
-        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,k),K0(kt,k),K1(kt,k));
+        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,i),K0(kt,i),K1(kt,i));
         if(UID(kt,i) == uid)
         {
             k0 = K0(kt,i);
