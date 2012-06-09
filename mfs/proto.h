@@ -178,7 +178,7 @@ _PROTOTYPE(int set_key, (key_table_ref kt, int u_index, u32 k0, u32 k1)); //test
  * @param e: entry in the table to se the key
  * This gets the key for the appropriate entry
  */
-_PROTOTYPE(u8* get_key ,(key_table_ref kt, u8* key, int u_index)); //tested
+_PROTOTYPE(u8* get_key ,(key_table_ref kt, int u_index, u8* key)); //tested
 /*
  * new_table: void
  * This creates a new key table. Sets entries to 0
@@ -199,7 +199,7 @@ _PROTOTYPE(void free_table,(key_table_ref kt));
  * Returns -1 if no key found
  * This grabs the key for the id passed
  */
-_PROTOTYPE(char* get_key_by_uid,(key_table_ref kt, uid_t id));
+_PROTOTYPE(u8* get_key_by_uid,(key_table_ref kt, uid_t userid, u8* key));
 
 #endif
 
