@@ -93,7 +93,7 @@ void print_table (key_table_ref kt)
 }
 
 /* del_from_table */
-int add_to_table(key_table_ref kt, uid_t userid)
+int remove_from_table(key_table_ref kt, uid_t userid)
 {
     for(i = 0;i<MAX_KEY;i++)
     {

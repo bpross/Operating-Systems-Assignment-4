@@ -69,7 +69,7 @@ PUBLIC int fs_setkey()
     }
     else
     {
-        int check = del_from_table(kt,id);
+        int check = remove_from_table(kt,id);
         if(check == -1)
             fprintf(stderr,"SETKEY ERROR: No Key to Remove\n");
         else
