@@ -60,7 +60,7 @@ PUBLIC int fs_setkey()
             if (entries == 0) {
                 UID(kt,0) = id;
                 K0(kt,0) = k0;
-                k1(kt,0) = k1;
+                K1(kt,0) = k1;
                 entries++;
                 check = 1;
             }
