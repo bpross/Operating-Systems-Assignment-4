@@ -15,7 +15,7 @@
 #define K1( _kt, _i ) ((kt)[(_i)][2])
 
 /* new_table */
-key_table_ref init_table(key_table_ref kt)
+void init_table(key_table_ref kt)
 {
     int i;
     for(i=0;i<MAX_KEY;i++)
@@ -162,5 +162,5 @@ u8* get_key_by_uid(key_table_ref kt, uid_t userid, u8* key)
             return get_key(kt, i, key);
     }
     //not found
-    return -1;
+    return NULL;
 }

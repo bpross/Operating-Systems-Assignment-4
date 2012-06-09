@@ -20,7 +20,7 @@ typedef u32 **key_table_ref;
 
 
 /* new_table */
-key_table_ref init_table(key_table_ref kt);
+void init_table(key_table_ref kt);
 
 // /* free_table */
 // void free_table(key_table_ref kt);
