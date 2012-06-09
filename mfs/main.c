@@ -118,7 +118,13 @@ PRIVATE int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   SELF_E = getprocnr();
   buf_pool(DEFAULT_NR_BUFS);
   fs_block_size = _MIN_BLOCK_SIZE;
-  new_table(kt);
+  for(i=0;i<MAX_KEY;i++)
+    {
+        UID(kt,i) = -1;
+        K0(kt, i) = 0;
+        K1(kt, i) = 0;
+    }
+  entries = 0;
   return(OK);
 }
 

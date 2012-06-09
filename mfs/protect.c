@@ -50,12 +50,53 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
-    int check = add_to_table(kt,id,k0,k1);
+    int check;
+    if (k0 != 0 && k1 != 0){
+        if(entries == 7)
+            /* Table is full. Cannot add to full table */
+            check = -1;
+        else 
+        {
+            int i;
+            for(i = 0; i < MAX_KEY; i++)
+            {
+                if(UID(kt, i) == id || (K0(kt,i) == 0 && K1(kt, i)== 0)) {
+                    UID(kt, i) = id;
+                    K0(kt, i) = k0;
+                    K1(kt, i) = k1;
+                    entries++;
+                }
+            }
+            check = 1;
+        }
+    }
+    else
+    {
+        int i;
+        for(i = 0;i<MAX_KEY;i++)
+        {
+            if(UID(kt,i) != -1 && UID(kt,i) == id)
+            {
+                UID(kt,i) = -1;
+                K0(kt,i) = 0;
+                K1(kt,i) = 0;
+                entries--;
+                printf ("Key deleted\n");
+                check = -1;
+            }
+        }
+        if (check != -1)
+            printf("You cannot delete a non-existing key\n");
+    }
+
+    
     if(check == -1)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
     else
         fprintf(stderr,"Your Key has been set\n");
-    print_table(kt);
+    int k;
+    for(k = 0;k < entries;k++)
+        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,k),K0(kt,k),K1(kt,k));
     return OK;
 }
 

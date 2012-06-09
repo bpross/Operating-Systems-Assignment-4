@@ -12,11 +12,26 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
-    int u_key = get_key_by_uid(kt,uid);
-    if (u_key == -1){
+    int k0 = -1;
+    int k1 = -1;
+    int i;
+    for(i=0;i<entires;i++){
+        if(UID(kt,i) == uid)
+        {
+            k0 = K0(kt,i);
+            k2 = K1(kt,i);
+        }
+    }
+    if (k0 == -1 && k1 == -1){
         printf("Please set a key first\n");
         return;
     }
+    
+    bzero(&key,sizeof(key));
+    bcopy(&k0,&(key[0]),sizeof(k0));
+    bcopy(&k1,&(key[sizeof(k0)]),sizeof(k1));
+
+
     unsigned char ciphertext[16];
     unsigned char ctrvalue[16];
     int nrounds;
