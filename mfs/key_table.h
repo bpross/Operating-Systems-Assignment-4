@@ -13,6 +13,7 @@
 #define MAX_KEY 8
 
 typedef unsigned long u32;
+typedef unsigned char u8;
 
 //typedef struct key_entry *key_entry_ref;
 typedef u32 **key_table_ref;
@@ -86,14 +87,14 @@ unsigned char * get_key (key_entry_ref e); //tested
  * new_table: void
  * This creates a new key table. Sets entries to 0
  */
-key_table_ref new_table(void); //tested
+key_table_ref init_table(void); //tested
 
-/*
- * free_table: kt
- * @param kt: table to be freed
- * This frees the table
- */
-void free_table(key_table_ref kt);
+// /*
+ // * free_table: kt
+ // * @param kt: table to be freed
+ // * This frees the table
+ // */
+// void free_table(key_table_ref kt);
 
 /*
  * get_key_by_uid: kt, id

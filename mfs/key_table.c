@@ -10,39 +10,38 @@
 //#include "fs.h"
 #include "key_table.h"
 
-#define UID( _i ) key_table[0][_i]
-#define K0( _i ) key_table[1][_i]
-#define K1( _i ) key_table[2][_i]
+#define UID( _kt, _i ) (kt)[(_i)][0]
+#define K0( _kt, _i ) (kt)[(_i)][1]
+#define K1( _kt, _i ) (kt)[(_i)][2]
 
 u32 **key_table;
 
 /* new_table */
-key_table_ref new_table(void)
+key_table_ref init_table(key_table_ref kt)
 {
-    key_table_ref kt;
     
     int i;
     for(i=0;i<MAX_KEY;i++)
-        bzero(key_table[i], sizeof(struct key_entry));
-        
+    {
+        K0(kt, i) = 0;
+        K1(kt, i) = 0;
+    }
+    
     kt = key_table;
     return(kt);
 }
 
-/* free_table */
-void free_table(key_table_ref kt)
-{
-    // Do nothing, the table will get freed when the program exits.
-#if 0
-    int i;
-    for(i=0;i<kt->entries;i++)
-    {
-        free(kt->keys[i]);
-    }
-    free(kt->keys);
-    free(kt);
-#endif
-}
+// /* free_table */
+// void free_table(key_table_ref kt)
+// {
+    // int i;
+    // for(i=0;i<kt->entries;i++)
+    // {
+        // free(kt->keys[i]);
+    // }
+    // free(kt->keys);
+    // free(kt);
+// }
 
 /* set_uid */
 key_entry_ref set_uid (key_entry_ref e, uid_t uid)
@@ -70,12 +69,17 @@ unsigned char * get_key(key_entry_ref e)
     return e->key;
 }
 
+int is_empty (key_table_ref kt, int i)
+{
+    return (K0(kt, i) == NULL && K1(kt, i) == NULL);
+}
+
 /* table_full */
 int table_full (key_table_ref kt)
 {
     int i;
     for (i = 0; i < MAX_KEY; i++) {
-        if (kt[i].key == NULL)
+        if (is_empty (i))
             return 0;
     }
     return 1;
@@ -87,9 +91,21 @@ void print_table (key_table_ref kt)
     int i;
     for(i=0;i<MAX_KEY;++i)
     {
-        if (get_key() == NULL)
-        printf("%d:\tuid: %d\tkey: %s\n",i,kt[i].userid,kt[i].key);
+        printf("%d:\tuid: %d\tk0: %80x\tk1: %80x\n",
+                    i,UID(kt,i),K0(kt,i), K!(kt,i));
     }
+}
+
+int has_key(key_table_ref kt, uid_t userid)
+{
+    int i;
+    for(i = 0; i < MAX_KEY; i++)
+    {
+        if(!is_empty(kt, i) && ((uid_t) UID(kt, i)) == userid)
+            return 1;
+    }
+    
+    return 0; /* Didn't find it */
 }
 
 /* remove_from_table */
