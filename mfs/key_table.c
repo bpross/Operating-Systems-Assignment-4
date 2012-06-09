@@ -10,34 +10,35 @@
 //#include "fs.h"
 #include "key_table.h"
 
+typedef unsigned long u32;
+
 /* Struct Definitions */
 struct key_entry{
     uid_t userid;
-    unsigned char *key;
+    u32 k0;
+    u32 k1;
 };
 
-struct key_table {
-    struct key_entry **keys;
-    int entries;
-};
-
+struct key_entry key_table[MAX_KEY];
 
 /* new_table */
 key_table_ref new_table(void)
 {
     key_table_ref kt;
-    kt = calloc(1, sizeof(key_table_ref));
-    kt->entries = 0;
-    kt->keys = calloc(MAX_KEY, sizeof(key_entry_ref));
+    
     int i;
     for(i=0;i<MAX_KEY;i++)
-        kt->keys[i] = malloc(sizeof(key_entry_ref));
+        bzero(key_table[i], sizeof(struct key_entry));
+        
+    kt = key_table;
     return(kt);
 }
 
 /* free_table */
 void free_table(key_table_ref kt)
 {
+    // Do nothing, the table will get freed when the program exits.
+#if 0
     int i;
     for(i=0;i<kt->entries;i++)
     {
@@ -45,6 +46,7 @@ void free_table(key_table_ref kt)
     }
     free(kt->keys);
     free(kt);
+#endif
 }
 
 /* set_uid */
@@ -76,19 +78,22 @@ unsigned char * get_key(key_entry_ref e)
 /* table_full */
 int table_full (key_table_ref kt)
 {
-    if (kt->entries < MAX_KEY)
-        return 0;
-    else
-        return 1;
+    int i;
+    for (i = 0; i < MAX_KEY; i++) {
+        if (kt[i].key == NULL)
+            return 0;
+    }
+    return 1;
 }
 
 /* print_table */
 void print_table (key_table_ref kt)
 {
     int i;
-    for(i=0;i<kt->entries;++i)
+    for(i=0;i<MAX_KEY;++i)
     {
-        printf("%d:\tuid: %d\tkey: %s\n",i,kt->keys[i]->userid,kt->keys[i]->key);
+        if (get_key() == NULL)
+        printf("%d:\tuid: %d\tkey: %s\n",i,kt[i].userid,kt[i].key);
     }
 }
 
@@ -110,7 +115,7 @@ int remove_from_table(key_table_ref kt, uid_t userid)
 }
             
 /* add_to_table */
-int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
+int add_to_table(key_table_ref kt, uid_t userid, u32 k0, u32 k1)
 {
     if(table_full(kt))
         /* Table is full. Cannot add to full table */

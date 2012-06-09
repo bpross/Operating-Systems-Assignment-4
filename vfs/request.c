@@ -105,6 +105,7 @@ PUBLIC int req_setkey( int fs_e, int k0, int k1, uid_t id)
     message m;
     m.m_type = REQ_SETKEY;
     int r;
+    printf("VFS REQUEST: K0: %d\tK1: %d",k0,k1);
     m.m1_i1 = k0;
     m.m1_i2 = k1;
     m.m2_i1 = id;

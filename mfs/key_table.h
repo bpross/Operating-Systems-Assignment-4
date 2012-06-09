@@ -12,8 +12,8 @@
 
 #define MAX_KEY 8
 
-typedef struct key_table *key_table_ref;
 typedef struct key_entry *key_entry_ref;
+typedef struct key_entry *key_table_ref;
 
 /*
  * add_to_table: kt, userid, key
