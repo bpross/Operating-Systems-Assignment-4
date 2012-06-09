@@ -15,11 +15,11 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     int k0 = -1;
     int k1 = -1;
     int i;
-    for(i=0;i<entires;i++){
+    for(i=0;i<entries;i++){
         if(UID(kt,i) == uid)
         {
             k0 = K0(kt,i);
-            k2 = K1(kt,i);
+            k1 = K1(kt,i);
         }
     }
     if (k0 == -1 && k1 == -1){
@@ -36,7 +36,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     unsigned char ctrvalue[16];
     int nrounds;
     int offset = 0;
-    int i,ctr;
+    int ctr;
 
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
