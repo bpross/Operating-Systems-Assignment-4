@@ -63,8 +63,6 @@ uid_t get_uid(key_entry_ref e)
 /* set_key */
 key_entry_ref set_key (key_entry_ref e, unsigned char* key)
 {
-
-    printf("Key: %s\n",key);
     e->key = key;
     return e;
 }
@@ -94,6 +92,22 @@ void print_table (key_table_ref kt)
     }
 }
 
+/* del_from_table */
+int add_to_table(key_table_ref kt, uid_t userid)
+{
+    for(i = 0;i<MAX_KEY;i++)
+    {
+        if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == userid)
+        {
+            kt->keys[i] = NULL;
+            printf ("Key deleted\n");
+            return 1;
+        }
+    }
+    /* if we get here, the table doesn't contain an entry for the user */
+    return -1;
+}
+            
 /* add_to_table */
 int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
 {
@@ -106,17 +120,24 @@ int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key)
         if ( u_key != NULL )
         {
             int i;
-            for(i = 0;i<kt->entries;i++)
+            for(i = 0;i<MAX_KEY;i++)
             {
-                if(get_uid(kt->keys[i]) == userid)
+                if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == userid)
                     kt->keys[i] = set_key(kt->keys[i],key);
             } 
             printf("Key Updated\n");
         }
         else {
-            kt->keys[kt->entries] = set_uid(kt->keys[kt->entries],userid);
-            kt->keys[kt->entries] = set_key(kt->keys[kt->entries],key);
-            kt->entries++;
+            for(i = 0;i<MAX_KEY;i++)
+            {
+                if(kt->keys[i] == NULL)
+                {
+                    kt->keys[i] = set_uid(kt->keys[kt->entries],userid);
+                    kt->keys[i] = set_key(kt->keys[kt->entries],key);
+                    kt->entries++;
+                    break;
+                }
+            }
         }
         return 1;
     }
@@ -127,7 +148,7 @@ unsigned char* get_key_by_uid(key_table_ref kt, uid_t id)
     int i;
     for(i = 0;i<kt->entries;i++)
     {
-        if(get_uid(kt->keys[i]) == id)
+        if(kt->keys[i] != NULL && get_uid(kt->keys[i]) == id)
             return get_key(kt->keys[i]);
     }
     //not found

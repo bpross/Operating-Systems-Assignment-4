@@ -28,6 +28,16 @@ typedef struct key_entry *key_entry_ref;
 int add_to_table(key_table_ref kt, uid_t userid, unsigned char* key); //tested
 
 /*
+ * remove_from_table: kt, userid
+ * @param kt: Key table to remove key from
+ * @param userid: userid to remove from the table
+ * This method searches the table for an entry associated with userid and
+ * deletes it.
+ * If no entry exists for userid, returns -1
+ */
+int remove_from_table(key_table_ref kt, uid_t userid);
+
+/*
  * print_table: kt
  * @param kt: Table to print
  * This prints the table to stdout in the following fashion:
