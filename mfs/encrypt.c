@@ -17,7 +17,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
         printf("KT IS NOT NULL\n");
     int u_key = get_key_by_uid(kt,uid);
     print_table(kt);
-    if (u_key == NULL){
+    if (u_key == -1){
         printf("Please set a key first\n");
         return;
     }

@@ -109,7 +109,7 @@ PUBLIC int add_to_table(key_table_ref kt, uid_t userid, int key)
     else 
     {
         int u_key = get_key_by_uid(kt,userid);
-        if ( u_key != NULL )
+        if ( u_key != -1 )
         {
             int i;
             for(i = 0;i<kt->entries;i++)
@@ -139,5 +139,5 @@ PUBLIC int get_key_by_uid(key_table_ref kt, uid_t id)
             return get_key(kt->keys[i]);
     }
     //not found
-    return NULL;
+    return -1;
 }
