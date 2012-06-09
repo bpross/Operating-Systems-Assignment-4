@@ -68,7 +68,7 @@ PUBLIC uid_t get_uid(key_entry_ref e)
 }
 
 /* set_key */
-PUBLIC key_entry_ref set_key (key_entry_ref e, unsigned int key)
+PUBLIC key_entry_ref set_key (key_entry_ref e, int key)
 {
 
     e->key = key;
@@ -96,7 +96,7 @@ PUBLIC void print_table (key_table_ref kt)
     int i;
     for(i=0;i<kt->entries;++i)
     {
-        printf("%d:\tuid: %d\tkey: %s\n",i,kt->keys[i]->userid,kt->keys[i]->key);
+        printf("%d:\tuid: %d\tkey: %d\n",i,kt->keys[i]->userid,kt->keys[i]->key);
     }
 }
 
