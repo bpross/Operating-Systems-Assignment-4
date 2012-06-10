@@ -118,6 +118,7 @@ PUBLIC int do_chmod()
   if(en == 1){
     int q;
     char new_buf[vp->v_size];
+    message m;
     m.fd = m_in.fd;
     m.buffer = new_buf;
     m.nbytes = vp->v_size;
