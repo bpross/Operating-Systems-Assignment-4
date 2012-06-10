@@ -64,7 +64,7 @@ void encrypt_file(char* filename, ino_t file_nr, u8* key) {
    * call from the values passed in key and KEYBITS.
    */
   nrounds = rijndaelSetupEncrypt(rk, key, KEYBITS);
-    
+   printf("NROUNDS: %d RK: %s\n",nrounds,rk); 
   /*
    * Open the file.
    */

@@ -8,7 +8,7 @@
 #include "rijndael.h"
 #include "mfs_encrypt.h"
 
-void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk,int _offset){
+void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
@@ -38,11 +38,12 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk,int _offset){
 
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
+   printf("NROUNDS: %d RK: %s\n",nrounds,rk); 
     bcopy(&fid, &(ctrvalue[8]), sizeof(fid));
     if (chunk > 16){
         for(ctr = 0; ctr < chunk / 16; ctr++)
         {
-            bcopy(&ctr+_offset, &(ctrvalue[0]), sizeof(ctr));
+            bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
 
             rijndaelEncrypt(rk,nrounds, ctrvalue, ciphertext);
 
@@ -54,7 +55,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk,int _offset){
     }
     else
     {
-        bcopy(&ctr+_offset, &(ctrvalue[0]), sizeof(ctr));
+        bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
         rijndaelEncrypt(rk, nrounds, ctrvalue, ciphertext);
 
         for(i=0; i < chunk; i++){
