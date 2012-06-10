@@ -38,7 +38,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
-   printf("NROUNDS: %d RK: %s\n",nrounds,rk); 
     bcopy(&fid, &(ctrvalue[8]), sizeof(fid));
     if (chunk > 16){
         for(ctr = 0; ctr < chunk / 16; ctr++)
