@@ -106,6 +106,7 @@ PUBLIC int fs_setkey()
     int k;
     for(k = 0;k < entries;k++)
         printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,k),K0(kt,k),K1(kt,k));
+    printf("Entries: %d\n",entries);
     return OK;
 }
 
