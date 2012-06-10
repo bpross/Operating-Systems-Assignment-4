@@ -16,6 +16,7 @@
 #include "path.h"
 #include "param.h"
 #include <minix/vfsif.h>
+#include <string.h>
 #include "vnode.h"
 #include "vmnt.h"
 
@@ -27,11 +28,9 @@ PUBLIC int do_setkey()
     struct vmnt *vmp;
     for (vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS];vmp++)
     {
-        printf("FS_E: %d Flags: %d Label: %s Num: %d\n",vmp->m_fs_e,vmp->m_flags,vmp->m_label,vmp->m_dev);
+        if(strncmp(vmp->m_label,"procfs",6) > 0)
+            r = req_setkey(vmp->m_fs_e,k0,k1);
     }
-    r = req_setkey(73134,k0,k1);
-    r = req_setkey(73138,k0,k1);
-    r = req_setkey(73137,k0,k1);
     return(r);
 }
 /*===========================================================================*
