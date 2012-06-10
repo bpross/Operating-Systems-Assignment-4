@@ -28,6 +28,10 @@ cp ./mfs/rijndael.h /usr/src/servers/mfs/rijndael.h
 cp ./mfs/mfs_encrypt.h /usr/src/servers/mfs/mfs_encrypt.h
 cp ./mfs/encrypt.c /usr/src/servers/mfs/encrypt.c
 
+echo -e "Copying System Command Files"
+cp ./MakefileCommand /usr/src/commands/Makefile
+cp -R ./setkey /usr/src/commands/
+
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/
 make install
