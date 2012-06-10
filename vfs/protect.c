@@ -25,7 +25,10 @@ PUBLIC int do_setkey()
     int k1 = m_in.m1_i2;
     int r;
     struct vmnt *vmp;
-
+    for (vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS];vmp++)
+    {
+        printf("FS_E: %d Flags: %d Label: %s Num: %d\n",vmp->m_fs_e,vmp->m_flags,vmp->m_label,vmp->m_dev);
+    }
     r = req_setkey(73134,k0,k1);
     r = req_setkey(73138,k0,k1);
     r = req_setkey(73137,k0,k1);
