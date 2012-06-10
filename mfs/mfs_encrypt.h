@@ -1,8 +1,18 @@
-#include <unistd.h>
-#include <minix/u64.h>
 #include "fs.h"
 #include "inode.h"
+#include "super.h"
+#include "mfs_encrypt.h"
 #include "key_table.h"
+#include <stddef.h>
+#include "buf.h"
+#include <string.h>
+#include <stdlib.h>
+#include <minix/com.h>
+#include <minix/u64.h>
+#include <minix/vfsif.h>
+#include <assert.h>
+#include <stdio.h>
+
 
 #ifndef __MFS_ENCRYPT_H__
 #define __MFS_ENCRYPT_H__
