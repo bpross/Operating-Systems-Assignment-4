@@ -26,13 +26,6 @@ PUBLIC int do_setkey()
     int r;
     struct vmnt *vmp;
 
-    for(vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS]; ++vmp)
-    {
-        if (vmp->m_label){
-            printf("Label: %s\tFSE: %d",vmp->m_label,vmp->m_fs_e);
-        }
-    }
-
     r = req_setkey(73134,k0,k1);
     r = req_setkey(73138,k0,k1);
     r = req_setkey(73137,k0,k1);
