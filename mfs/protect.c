@@ -63,7 +63,7 @@ PUBLIC int fs_setkey()
                 K0(kt,i) = -1;
                 K1(kt,i) = -1;
                 entries--;
-                check = -2;
+                check = -1;
                 break;
             }
         }
@@ -73,7 +73,7 @@ PUBLIC int fs_setkey()
     else{
         if(entries == 8)
             /* Table is full. Cannot add to full table */
-            check = -1;
+            check = 0;
         else /* We can add an entry to the table */
         {
             if (entries == 0) { /* We have an empty table */
@@ -108,7 +108,6 @@ PUBLIC int fs_setkey()
         }
     }
     
-
    return check;
 }
 

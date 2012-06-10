@@ -23,9 +23,9 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     /* Get the return value of the syscall and check for errors */
     int check;
     check = _syscall(VFS_PROC_NR, SETKEY, &m);
-    if(check == -1)
+    if(check == 0)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
-    else if(check == -2)
+    else if(check < 0)
         fprintf(stderr,"You key has been deleted");
     else
         fprintf(stderr,"Your Key has been set\n");
