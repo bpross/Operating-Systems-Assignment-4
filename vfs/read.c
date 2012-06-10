@@ -1,3 +1,7 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ */
 /* This file contains the heart of the mechanism used to read (and write)
  * files.  Read and write requests are split up into chunks that do not cross
  * block boundaries.  Each chunk is then processed in turn.  Reads on special

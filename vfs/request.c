@@ -1,3 +1,7 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ */
 /* This file contains the wrapper functions for issuing a request
  * and receiving response from FS processes.
  * Each function builds a request message according to the request

@@ -1,3 +1,7 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ */
 #ifndef __MINIX_VFSIF_H
 #define __MINIX_VFSIF_H
 

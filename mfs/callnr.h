@@ -1,3 +1,7 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ */
 #define NCALLS		 114	/* number of system calls allowed */
 
 /* In case it isn't obvious enough: this list is sorted numerically. */

@@ -1,3 +1,7 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ */
 #ifndef __MFS_GLO_H__
 #define __MFS_GLO_H__
 
