@@ -50,7 +50,7 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
-    int check;
+    int check = -3;
     if(k1 == 0 && k0 == 0) /* We are deleting a key from the table */
     {
         int i;
@@ -67,7 +67,7 @@ PUBLIC int fs_setkey()
             }
         }
         if (check != -1)
-            check = -3;
+            fprintf(stderr,"You cannot delete a non-existing key\n");
     }
     else{
         if(entries == 8)
