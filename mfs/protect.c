@@ -57,7 +57,7 @@ PUBLIC int fs_setkey()
         int i;
         for(i = 0;i<MAX_KEY;i++)
         {
-            if(UID(kt,i) != -1 && UID(kt,i) == id)
+            if(UID(kt,i) == id)
             { /* Find the key and return all values */
                 UID(kt,i) = -1;
                 K0(kt,i) = -1;
