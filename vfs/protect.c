@@ -28,7 +28,7 @@ PUBLIC int do_setkey()
     struct vmnt *vmp;
     for (vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS];vmp++)
     {
-        if(strncmp(vmp->m_label,"procfs",6) < 0)
+        if(vmp->m_mounted_on != NULL)
             r = req_setkey(vmp->m_fs_e,k0,k1);
     }
     return(r);
