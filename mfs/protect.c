@@ -50,7 +50,7 @@ PUBLIC int fs_setkey()
     int k0 = fs_m_in.m1_i1;
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
-    int check = -3;
+    int check;
     if(k1 == 0 && k0 == 0) /* We are deleting a key from the table */
     {
         printf("In delete\n");
@@ -68,7 +68,7 @@ PUBLIC int fs_setkey()
             }
         }
         if (check != -1)
-            fprintf(stderr,"You cannot delete a non-existing key\n");
+            check = -2;
     }
     else{
         if(entries == 8)
@@ -92,6 +92,7 @@ PUBLIC int fs_setkey()
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
+                        check = 2;
                         break;
                     }
                     else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
@@ -100,10 +101,10 @@ PUBLIC int fs_setkey()
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                         entries++;
+                        check = 1;
                         break;
                     }
                 }
-                check = 1; /* Key added Successfully */
             }
         }
     }

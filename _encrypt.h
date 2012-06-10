@@ -26,8 +26,12 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     printf("Check in library: %d\n",check);
     if(check == 0)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
-    else if(check < 0)
-        fprintf(stderr,"You key has been deleted");
+    else if(check == -1)
+        fprintf(stderr,"You key has been deleted\n");
+    else if(check == -2)
+        fprintf(stderr,"You do not have a key to delete\n");
+    else if(check == 2)
+        fprintf(stderr,"Your key has been updated\n");
     else
         fprintf(stderr,"Your Key has been set\n");
 }
