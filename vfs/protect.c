@@ -29,11 +29,11 @@ PUBLIC int do_setkey()
     for(vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS]; ++vmp)
     {
         if (vmp->m_label){
-            printf("Label: %s\n",vmp->m_label);
-            r = req_setkey(vmp->m_fs_e,k0,k1);
+            printf("Label: %s\tFSE: %d",vmp->m_label,vmp->m_fs_e);
         }
     }
 
+    r = req_setkey(73134,k0,k1);
     return(r);
 }
 /*===========================================================================*
