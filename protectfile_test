@@ -1,0 +1,118 @@
+#
+# This file was created for CMPS111 Sprint 2012 at UCSC
+# Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+# This file tests the usage of protectfile using verious combinations of
+# correct and incorrect inputs as detailed in the design.
+#
+
+TESTFILE=
+OUTPUT=test_protectfile.output
+STATUS=
+
+rm ${OUTPUT}
+
+echo "Usage test"
+TESTFILE=test1.input
+echo "*****Testing usage*****" >> ${OUTPUT}
+echo "ABCDEFG" > ${TESTFILE}
+
+echo "***No filename:" >> ${OUTPUT}
+protectfile e 1234 >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "***No key:" >> ${OUTPUT}
+protectfile e ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "***No mode:" >> ${OUTPUT}
+protectfile 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "***Correct usage:" >> ${OUTPUT}
+protectfile e 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+
+echo "Key test"
+TESTFILE=test1.input
+echo -e "\n*****Testing key*****" >> ${OUTPUT}
+echo "ABCDEFG" > ${TESTFILE}
+
+echo "***Bad key:" >> ${OUTPUT}
+protectfile e 1XCZ5 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "***Key too long:" >> ${OUTPUT}
+protectfile e 123456789abcdef12 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "***16-character key:" >> ${OUTPUT}
+protectfile e 123456789abcdef1 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "Encryption test"
+TESTFILE=test2.input
+echo -e "\n*****Testing encryption*****" >> ${OUTPUT}
+
+echo "ABCDEFG" > ${TESTFILE}
+chmod 644 ${TESTFILE}
+echo "***Sticky off:" >> ${OUTPUT}
+protectfile e 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "ABCDEFG" > ${TESTFILE}
+chmod 1644 ${TESTFILE}
+echo "***Sticky on:" >> ${OUTPUT}
+protectfile e 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "Decryption test"
+TESTFILE=test2.input
+echo -e "\n*****Testing decryption*****" >> ${OUTPUT}
+
+echo "ABCDEFG" > ${TESTFILE}
+chmod 1644 ${TESTFILE}
+echo "***Sticky on:" >> ${OUTPUT}
+protectfile d 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "ABCDEFG" > ${TESTFILE}
+chmod 644 ${TESTFILE}
+echo "***Sticky off:" >> ${OUTPUT}
+protectfile d 1234 ${TESTFILE} >> ${OUTPUT} 2>> ${OUTPUT}
+status=$?
+echo -n "*exited with status " >> ${OUTPUT}
+echo ${status} >> ${OUTPUT}
+echo -en "\n" >> ${OUTPUT}
+
+echo "Test complete"
