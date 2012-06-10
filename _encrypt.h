@@ -21,9 +21,17 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     m.m1_i2 = k1;
 
     /* Get the return value of the syscall and check for errors */
-    int retvalue;
-    retvalue = _syscall(VFS_PROC_NR, SETKEY, &m);
-    if(retvalue < 0){
-        printf("Error with syscall setkey: %s\n", strerror( errno ));
-    }
+    int check;
+    check = _syscall(VFS_PROC_NR, SETKEY, &m);
+    printf("Check in library: %d\n",check);
+    if(check == 0)
+        fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
+    else if(check == -1)
+        fprintf(stderr,"You key has been deleted\n");
+    else if(check == -2)
+        fprintf(stderr,"You do not have a key to delete\n");
+    else if(check == 2)
+        fprintf(stderr,"Your key has been updated\n");
+    else
+        fprintf(stderr,"Your Key has been set\n");
 }

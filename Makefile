@@ -2,8 +2,10 @@ GCCOPT     = -Wall -Wextra
 
 TESTPROT_F = test1
 
-testsyscall:
-	gcc -o test syscall_test.c
+setkey:
+	gcc -o setkey setkey.c
+	chmod +x setkey
+	mv setkey /usr/bin
 
 testtable:
 	gcc -o test key_table_test.c mfs/key_table.c mfs/key_table.h

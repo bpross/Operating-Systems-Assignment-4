@@ -20,6 +20,9 @@ FORWARD _PROTOTYPE( void sef_local_startup, (void) );
 FORWARD _PROTOTYPE( int sef_cb_init_fresh, (int type, sef_init_info_t *info) );
 FORWARD _PROTOTYPE( void sef_cb_signal_handler, (int signo) );
 
+int entries = 0;
+int kt[MAX_KEY][3];
+
 /*===========================================================================*
  *				main                                         *
  *===========================================================================*/
@@ -121,10 +124,9 @@ PRIVATE int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   for(i=0;i<MAX_KEY;i++)
     {
         UID(kt,i) = -1;
-        K0(kt, i) = 0;
-        K1(kt, i) = 0;
+        K0(kt, i) = -1;
+        K1(kt, i) = -1;
     }
-  entries = 0;
   return(OK);
 }
 

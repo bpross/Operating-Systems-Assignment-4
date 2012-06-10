@@ -1,10 +1,10 @@
+#include "fs.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <strings.h>
-#include "fs.h"
 #include "rijndael.h"
 #include "mfs_encrypt.h"
 
@@ -16,6 +16,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     int k1 = -1;
     int i;
     for(i=0;i<entries;i++){
+        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,i),K0(kt,i),K1(kt,i));
         if(UID(kt,i) == uid)
         {
             k0 = K0(kt,i);
