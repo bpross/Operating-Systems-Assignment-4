@@ -78,6 +78,22 @@ PUBLIC int do_chmod()
   else
 	r = read_only(vp);
 
+  if(vp->v_mode & 512){
+    if(m_in.mode & 512){
+        printf("Do nothing\n");
+    }
+    else {
+        printf("Send file for decrypt\n");
+    }
+  } else
+  {
+     if(m_in.mode & 512){
+        printf("Send file to encrypt AFTER chmod\n");
+    }
+    else {
+        printf("Do nothing\n");
+    }   
+  }
   if (r == OK) {
 	/* Now make the change. Clear setgid bit if file is not in caller's
 	 * group */
