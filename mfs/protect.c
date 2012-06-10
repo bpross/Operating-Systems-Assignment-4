@@ -94,8 +94,8 @@ PUBLIC int fs_setkey()
             if(UID(kt,i) != -1 && UID(kt,i) == id)
             {
                 UID(kt,i) = -1;
-                K0(kt,i) = 0;
-                K1(kt,i) = 0;
+                K0(kt,i) = -1;
+                K1(kt,i) = -1;
                 entries--;
                 check = -2;
             }
