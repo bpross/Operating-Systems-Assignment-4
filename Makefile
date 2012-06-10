@@ -44,7 +44,7 @@ installen:
 
 compile:
 	cd /usr/src/tools/
-	make hdboot
+	${MAKE} hdboot
 	reboot
 
 setkey:
