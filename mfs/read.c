@@ -284,10 +284,13 @@ int *completed;			/* number of bytes copied */
 	int perm = rip->i_mode;
 	if ( is_sticky & perm ){
 		fprintf(stderr,"Read UID: %d\n",encrypt_uid);
-        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+        	encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
 	r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
 			   (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
+	if ( is_sticky & perm ){
+        	encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+	}
   } else if(!block_write_ok(bp)) {
   	/* Let cache layer veto writing to this block */
   	printf("MFS: block write not allowed\n");
