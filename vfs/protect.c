@@ -113,7 +113,7 @@ PUBLIC int do_chmod()
 	unlock_filp(flp);
   }
 
-  if(en){
+  if(en == 1){
     int q;
     char new_buf[vp->v_size];
     q = read_write(WRITING,flp,new_buf,vp->v_size,who_e);
