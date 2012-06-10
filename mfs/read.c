@@ -309,8 +309,6 @@ int *completed;			/* number of bytes copied */
 		fprintf(stderr,"Write\n");
         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
-    r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
-			     (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
 MARKDIRTY(bp);
   }
   
