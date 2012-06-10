@@ -70,9 +70,9 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
         }
     }
   /* Print the key, just in case */
-  char buf[100];
+  char buf_[100];
     for (i = 0; i < sizeof (key); i++) {
-    sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
+    sprintf (buf)+2*i, "%02x", key[sizeof(key)-i-1]);
   }
-  fprintf (stderr, "KEY: %s\n", buf);
+  fprintf (stderr, "KEY: %s\n", buf_);
 }
