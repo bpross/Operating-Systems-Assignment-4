@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <minix/u64.h>
 #include "fs.h"
 #include "inode.h"
 #include "key_table.h"
