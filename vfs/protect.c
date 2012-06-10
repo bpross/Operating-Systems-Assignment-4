@@ -24,6 +24,12 @@ PUBLIC int do_setkey()
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
     int r;
+    struct vmnt *vmp;
+
+    for(vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS]; ++vmp)
+    {
+        printf("Lable: %s\n",vmp->m_label);
+    }
     r = req_setkey(73134,k0,k1);
 
     return(r);
