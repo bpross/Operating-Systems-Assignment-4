@@ -20,17 +20,21 @@
 #include "vnode.h"
 #include "vmnt.h"
 
+
 PUBLIC int do_setkey()
 {
     int k0 = m_in.m1_i1;
     int k1 = m_in.m1_i2;
     int r;
+    
+    /* Iterate Through the Mount Table and Send off Requests to setkey */
     struct vmnt *vmp;
     for (vmp = &vmnt[0]; vmp < &vmnt[NR_MNTS];vmp++)
     {
         if(vmp->m_root_node != NULL)
             r = req_setkey(vmp->m_fs_e,k0,k1);
     }
+    /* Return the check value for setkey to library */
     return(r);
 }
 /*===========================================================================*

@@ -52,47 +52,47 @@ PUBLIC int fs_setkey()
     uid_t id = credentials.vu_uid;
     int check;
     if (k0 != 0 && k1 != 0){
-        if(entries == 7)
+        if(entries == 8)
             /* Table is full. Cannot add to full table */
             check = -1;
-        else 
+        else /* We can add an entry to the table */
         {
-            if (entries == 0) {
+            if (entries == 0) { /* We have an empty table */
                 UID(kt,0) = id;
                 K0(kt,0) = k0;
                 K1(kt,0) = k1;
                 check = 1;
                 entries++;
             }
-            else
+            else /* Table has entries */
             {
                 int i;
                 for(i = 0; i < entries; i++)
                 {
-                    if(UID(kt, i) == id) {
+                    if(UID(kt, i) == id) { /* The UID already has a key */
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                     }
                     else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
-                    {
+                    { /* No entry for this UID */
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                         entries++;
                     }
                 }
-                check = 1;
+                check = 1; /* Key added Successfully */
             }
         }
     }
-    else
+    else /* We are deleting a key from the table */
     {
         int i;
         for(i = 0;i<MAX_KEY;i++)
         {
             if(UID(kt,i) != -1 && UID(kt,i) == id)
-            {
+            { /* Find the key and return all values */
                 UID(kt,i) = -1;
                 K0(kt,i) = -1;
                 K1(kt,i) = -1;
@@ -101,21 +101,10 @@ PUBLIC int fs_setkey()
             }
         }
         if (check != -2)
-            printf("You cannot delete a non-existing key\n");
+            fprintf(stderr,"You cannot delete a non-existing key\n");
     }
 
-    
-    if(check == -1)
-        fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
-    else if(check == -2)
-        fprintf(stderr,"You key has been deleted");
-    else
-        fprintf(stderr,"Your Key has been set\n");
-    int k;
-    for(k = 0;k < entries;k++)
-        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,k),K0(kt,k),K1(kt,k));
-    printf("Entries: %d\n",entries);
-    return OK;
+   return check;
 }
 
 /*===========================================================================*
