@@ -118,7 +118,10 @@ PUBLIC int do_chmod()
   if(en == 1){
     int q;
     char new_buf[vp->v_size];
-    q = read_write(WRITING,flp,new_buf,vp->v_size,who_e);
+    m.fd = m_in.fd;
+    m.buffer = new_buf;
+    m.nbytes = vp->v_size;
+    q = do_write();
     printf("Q: %d\n",q);
   }
   put_vnode(vp);
