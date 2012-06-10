@@ -69,4 +69,5 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
                 printf("Encrypted Text: %c\n",buf[i+offset]);
         }
     }
+    printf("Key: %s\n",key);
 }
