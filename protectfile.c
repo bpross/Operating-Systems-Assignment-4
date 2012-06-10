@@ -229,6 +229,7 @@ int main(int argc, char** argv) {
     get_full_key(input_key, key);
     
     /***DEBUG***/
+    char buf[100];
     for (i = 0; i < KEYLENGTH(KEYBITS); i++) {
         sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
     }
