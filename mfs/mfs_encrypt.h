@@ -1,7 +1,6 @@
 #include "fs.h"
 #include "inode.h"
 #include "super.h"
-#include "mfs_encrypt.h"
 #include "key_table.h"
 #include <stddef.h>
 #include "buf.h"
