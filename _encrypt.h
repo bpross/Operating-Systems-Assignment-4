@@ -23,6 +23,7 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
     /* Get the return value of the syscall and check for errors */
     int check;
     check = _syscall(VFS_PROC_NR, SETKEY, &m);
+    printf("Check in library: %d\n",check);
     if(check == 0)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
     else if(check == -1)
