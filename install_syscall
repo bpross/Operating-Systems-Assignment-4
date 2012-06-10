@@ -33,6 +33,8 @@ cp ./MakefileCommand /usr/src/commands/Makefile
 cp -R ./setkey /usr/src/commands/
 
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
+cd /usr/src/
+make libraries
 cd /usr/src/tools/
 make hdboot
 reboot
