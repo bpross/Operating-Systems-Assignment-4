@@ -62,21 +62,28 @@ PUBLIC int fs_setkey()
                 K0(kt,0) = k0;
                 K1(kt,0) = k1;
                 check = 1;
+                entries++;
             }
             else
             {
                 int i;
                 for(i = 0; i < entries; i++)
                 {
-                    if(UID(kt, i) == id || (K0(kt,i) == 0 && K1(kt, i)== 0)) {
+                    if(UID(kt, i) == id) {
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                     }
+                    else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
+                    {
+                        UID(kt, i) = id;
+                        K0(kt, i) = k0;
+                        K1(kt, i) = k1;
+                        entries++;
+                    }
                 }
                 check = 1;
             }
-            entries++;
         }
     }
     else
