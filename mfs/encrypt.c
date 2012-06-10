@@ -8,7 +8,7 @@
 #include "rijndael.h"
 #include "mfs_encrypt.h"
 
-void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk,u64 position){
+void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk,int position){
 
     unsigned long rk[RKLENGTH(KEYBITS)];
     unsigned char key[KEYLENGTH(KEYBITS)];
