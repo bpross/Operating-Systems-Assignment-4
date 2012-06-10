@@ -124,8 +124,8 @@ PRIVATE int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   for(i=0;i<MAX_KEY;i++)
     {
         UID(kt,i) = -1;
-        K0(kt, i) = 0;
-        K1(kt, i) = 0;
+        K0(kt, i) = -1;
+        K1(kt, i) = -1;
     }
   return(OK);
 }

@@ -90,7 +90,6 @@ PUBLIC int fs_setkey()
                 K0(kt,i) = 0;
                 K1(kt,i) = 0;
                 entries--;
-                printf ("Key deleted\n");
                 check = -2;
             }
         }
@@ -101,6 +100,8 @@ PUBLIC int fs_setkey()
     
     if(check == -1)
         fprintf(stderr,"SETKEY ERROR: Key Table is Full\n");
+    else if(check == -2)
+        fprintf(stderr,"You key has been deleted");
     else
         fprintf(stderr,"Your Key has been set\n");
     int k;
