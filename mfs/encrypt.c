@@ -32,14 +32,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     bcopy(&k0,&(key[0]),sizeof(k0));
     bcopy(&k1,&(key[sizeof(k0)]),sizeof(k1));
 
-    /***DEBUG***/
-    char buf[100];
-    for (i = 0; i < KEYLENGTH(KEYBITS); i++) {
-        sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
-    }
-    fprintf (stderr, "KEY: %s\n", buf);
-    /***END DEBUG***/
-
     unsigned char ciphertext[16];
     unsigned char ctrvalue[16];
     int nrounds;
