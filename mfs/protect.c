@@ -53,7 +53,6 @@ PUBLIC int fs_setkey()
     int check;
     if(k1 == 0 && k0 == 0) /* We are deleting a key from the table */
     {
-        printf("In delete\n");
         int i;
         for(i = 0;i<MAX_KEY;i++)
         {
