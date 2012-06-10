@@ -1,3 +1,12 @@
+/*
+ * This file was created for CMPS111 Sprint 2012 at UCSC
+ * Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+ * This file contains code for the user-levgel encryption program
+ * protectfile
+ *
+ * Usage: protectfile [e|d] [key] [filename]
+ */
+
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>

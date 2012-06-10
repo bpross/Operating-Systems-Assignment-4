@@ -1,3 +1,10 @@
+#
+# This file was created for CMPS111 Sprint 2012 at UCSC
+# Authors: Benjamin Ross, Quentin Rivers, Matthew Musselman
+# This file tests the usage of protectfile using verious combinations of
+# correct and incorrect inputs as detailed in the design.
+#
+
 TESTFILE=
 OUTPUT=test_protectfile.output
 STATUS=
