@@ -53,6 +53,7 @@ PUBLIC int do_chmod()
   struct lookup resolve;
   flp = NULL;
 
+  int en = 0;
   lookup_init(&resolve, fullpath, PATH_NOFLAGS, &vmp, &vp);
   resolve.l_vmnt_lock = VMNT_WRITE;
   resolve.l_vnode_lock = VNODE_WRITE;
@@ -89,7 +90,8 @@ PUBLIC int do_chmod()
   {
      if(m_in.mode & 512){
         printf("Send file to encrypt AFTER chmod\n");
-    }
+        en = 1;
+     }
     else {
         printf("Do nothing\n");
     }   
@@ -111,6 +113,12 @@ PUBLIC int do_chmod()
 	unlock_filp(flp);
   }
 
+  if(en){
+    int q;
+    char new_buf[vp->v_size];
+    q = read_write(WRITING,flp,new_buf,vp->v_size,who_e);
+    printf("Q: %d\n",q);
+  }
   put_vnode(vp);
   return(r);
 }
