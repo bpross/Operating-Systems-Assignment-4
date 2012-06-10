@@ -230,7 +230,12 @@ int main(int argc, char** argv) {
     
     
     /* Clear the sticky bit before any encryption/decryption happens */
-    
+    file_info.st_mode = file_info.st_mode & (~S_ISVTX);
+    error = chmod(filename, file_info.st_mode);
+    if(error != 0) {
+        fprintf(stderr, "Error accessing the file.");
+        exit(EXIT_FAILURE);
+    }
     
     if (mode == 'e') {
         encrypt_file(filename, file_nr, key);
@@ -245,12 +250,7 @@ int main(int argc, char** argv) {
         encrypt_file(filename, file_nr, key);
     }
     
-    file_info.st_mode = file_info.st_mode & (~S_ISVTX);
-    error = chmod(filename, file_info.st_mode);
-    if(error != 0) {
-        fprintf(stderr, "Error accessing the file.");
-        exit(EXIT_FAILURE);
-    }
+    
     
     return EXIT_SUCCESS;
 }
