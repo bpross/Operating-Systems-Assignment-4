@@ -23,7 +23,6 @@ FORWARD _PROTOTYPE( int rw_chunk, (struct inode *rip, u64_t position,
 PRIVATE char getdents_buf[GETDENTS_BUFSIZ];
 
 int kt[MAX_KEY][3];
-int ctr;
 
 /*===========================================================================*
  *				fs_readwrite				     *
@@ -88,7 +87,6 @@ PUBLIC int fs_readwrite(void)
 		return EROFS;
 	      
   cum_io = 0;
-  ctr = 0;
   /* Split the transfer into chunks that don't span two blocks. */
   while (nrbytes > 0) {
 	  off = ((unsigned int) position) % block_size; /* offset in blk*/
@@ -112,7 +110,6 @@ PUBLIC int fs_readwrite(void)
 	  cum_io += chunk;	/* bytes read so far */
 	  position += (off_t) chunk;	/* position within the file */
   }
-  ctr = 0;
   fs_m_out.RES_SEEK_POS_LO = position; /* It might change later and the VFS
 					   has to know this value */
   
@@ -286,12 +283,12 @@ int *completed;			/* number of bytes copied */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
     if ( is_sticky & perm ){
-         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+         encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk,position);
     }
         r = sys_safecopyto(VFS_PROC_NR, gid, (vir_bytes) buf_off,
                                (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
      if ( is_sticky & perm ){
-        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk,position);
 	    } 
   } else if(!block_write_ok(bp)) {
   	/* Let cache layer veto writing to this block */

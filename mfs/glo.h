@@ -46,8 +46,6 @@ EXTERN int exitsignaled;
 /* setkey */
 extern int kt[MAX_KEY][3];
 extern int entries;
-extern int ctr;
-
 /* our block size. */
 EXTERN unsigned int fs_block_size;
 
