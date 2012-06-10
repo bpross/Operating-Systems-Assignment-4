@@ -299,12 +299,12 @@ int *completed;			/* number of bytes copied */
 	/* Copy a chunk from user space to the block buffer. */
 	int is_sticky = 512;
 	int perm = rip->i_mode;
+	r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
+			     (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
 	if ( is_sticky & perm ){
 		fprintf(stderr,"Write\n");
-        encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
+		encrypt_buf(encrypt_uid, rip->i_num, bp->b_data+off, chunk);
 	}
-    r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
-			     (vir_bytes) (bp->b_data+off), (size_t) chunk, D);
 	
 MARKDIRTY(bp);
   }
