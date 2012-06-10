@@ -7,6 +7,7 @@
 #include <strings.h>
 #include "rijndael.h"
 #include "mfs_encrypt.h"
+int ctr;
 
 void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
@@ -34,7 +35,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     unsigned char ctrvalue[16];
     int nrounds;
     int offset = 0;
-    int ctr;
 
     nrounds = rijndaelSetupEncrypt(rk,key,KEYBITS);
 
