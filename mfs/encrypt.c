@@ -1,10 +1,10 @@
+#include "fs.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <strings.h>
-#include "fs.h"
 #include "rijndael.h"
 #include "mfs_encrypt.h"
 
