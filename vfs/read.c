@@ -80,7 +80,6 @@ int rw_flag;			/* READING or WRITING */
   int r;
   scratch(fp).file.fd_nr = m_in.fd;
   scratch(fp).io.io_buffer = m_in.buffer;
-  printf("Buffer: %s\n",m_in.buffer);
   scratch(fp).io.io_nbytes = (size_t) m_in.nbytes;
   locktype = (rw_flag == READING) ? VNODE_READ : VNODE_WRITE;
   if ((f = get_filp(scratch(fp).file.fd_nr, locktype)) == NULL)
