@@ -34,5 +34,5 @@ cp -R ./setkey /usr/src/commands/
 
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/
-make install
+make hdboot
 reboot
