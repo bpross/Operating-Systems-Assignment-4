@@ -51,7 +51,26 @@ PUBLIC int fs_setkey()
     int k1 = fs_m_in.m1_i2;
     uid_t id = credentials.vu_uid;
     int check;
-    if (k0 != 0 && k1 != 0){
+    if(k1 == 0 && k0 == 0) /* We are deleting a key from the table */
+    {
+        printf("In delete\n");
+        int i;
+        for(i = 0;i<MAX_KEY;i++)
+        {
+            if(UID(kt,i) != -1 && UID(kt,i) == id)
+            { /* Find the key and return all values */
+                UID(kt,i) = -1;
+                K0(kt,i) = -1;
+                K1(kt,i) = -1;
+                entries--;
+                check = -2;
+                break;
+            }
+        }
+        if (check != -2)
+            fprintf(stderr,"You cannot delete a non-existing key\n");
+    }
+    else{
         if(entries == 8)
             /* Table is full. Cannot add to full table */
             check = -1;
@@ -88,24 +107,7 @@ PUBLIC int fs_setkey()
             }
         }
     }
-    else /* We are deleting a key from the table */
-    {
-        int i;
-        for(i = 0;i<MAX_KEY;i++)
-        {
-            if(UID(kt,i) != -1 && UID(kt,i) == id)
-            { /* Find the key and return all values */
-                UID(kt,i) = -1;
-                K0(kt,i) = -1;
-                K1(kt,i) = -1;
-                entries--;
-                check = -2;
-                break;
-            }
-        }
-        if (check != -2)
-            fprintf(stderr,"You cannot delete a non-existing key\n");
-    }
+    
 
    return check;
 }
