@@ -122,7 +122,7 @@ PUBLIC int do_chmod()
     m.fd = m_in.fd;
     m.buffer = new_buf;
     m.nbytes = vp->v_size;
-    q = do_write();
+    q = do_write(&m);
     printf("Q: %d\n",q);
   }
   put_vnode(vp);
