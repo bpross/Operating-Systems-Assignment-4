@@ -29,5 +29,4 @@ PUBLIC void setkey(unsigned int k0, unsigned int k1)
         fprintf(stderr,"You key has been deleted");
     else
         fprintf(stderr,"Your Key has been set\n");
-   }
 }
