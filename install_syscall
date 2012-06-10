@@ -1,33 +1,3 @@
-echo -e "Copying MFS files \n\n"
-cp ./mfs/callnr.h /usr/src/include/minix/callnr.h
-cp ./mfs/table.c /usr/src/servers/mfs/table.c
-cp ./mfs/proto.h /usr/src/servers/mfs/proto.h
-cp ./mfs/Makefile /usr/src/servers/mfs/Makefile
-cp ./mfs/protect.c /usr/src/servers/mfs/protect.c
-cp ./mfs/misc.c /usr/src/servers/mfs/misc.c
-cp ./mfs/main.c /usr/src/servers/mfs/main.c
-cp ./mfs/glo.h /usr/src/servers/mfs/glo.h
-cp ./mfs/key_table.h /usr/src/servers/mfs/key_table.h
-cp ./mfs/read.c /usr/src/servers/mfs/read.c
-cp ./_encrypt.h /usr/include/_encrypt.h
-echo -e "DONE COPYING MFS FILES\n\n"
-
-echo -e "Coping VFS files\n\n"
-cp ./vfs/protect.c /usr/src/servers/vfs/protect.c
-cp ./vfs/proto.h /usr/src/servers/vfs/proto.h
-cp ./vfs/request.c /usr/src/servers/vfs/request.c
-cp ./vfs/table.c /usr/src/servers/vfs/table.c
-cp ./vfs/vfsif.h /usr/src/include/minix/vfsif.h
-cp ./vfs/read.c /usr/src/servers/vfs/read.c
-cp ./vfs/glo.h /usr/src/servers/vfs/glo.h
-echo -e "DONE COPYING VFS FILES\n\n"
-
-echo -e "Copying Encrytion Files"
-cp ./mfs/rijndael.c /usr/src/servers/mfs/rijndael.c
-cp ./mfs/rijndael.h /usr/src/servers/mfs/rijndael.h
-cp ./mfs/mfs_encrypt.h /usr/src/servers/mfs/mfs_encrypt.h
-cp ./mfs/encrypt.c /usr/src/servers/mfs/encrypt.c
-
 echo -e "GOING TO RECOMPILE AND REBOOT\n\n"
 cd /usr/src/tools/
 make hdboot

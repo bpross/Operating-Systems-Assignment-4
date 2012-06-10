@@ -43,9 +43,7 @@ installen:
 	echo -e "Done Copying Encrytion Files"
 
 compile:
-	cd /usr/src/tools/
-	${MAKE} hdboot
-	reboot
+	./install_syscall
 
 setkey:
 	gcc -o setkey setkey.c
