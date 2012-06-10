@@ -73,7 +73,7 @@ PUBLIC int fs_setkey()
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
-                        printf("Reset key\n");
+                        break;
                     }
                     else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
                     { /* No entry for this UID */
@@ -81,6 +81,7 @@ PUBLIC int fs_setkey()
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                         entries++;
+                        break;
                     }
                 }
                 check = 1; /* Key added Successfully */
@@ -99,6 +100,7 @@ PUBLIC int fs_setkey()
                 K1(kt,i) = -1;
                 entries--;
                 check = -2;
+                break;
             }
         }
         if (check != -2)
