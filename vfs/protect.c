@@ -11,6 +11,7 @@
  */
 
 #include "fs.h"
+#include <lib.h>
 #include <unistd.h>
 #include <minix/callnr.h>
 #include "file.h"
