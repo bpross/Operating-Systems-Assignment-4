@@ -15,6 +15,7 @@ int main(int argc, char** argv)
     /* Get variables from the commandline */
     k0 = strtol(argv[1],NULL,0);
     k1 = strtol(argv[2],NULL,0);
-
+    printf("K0: %d\nK1: %d\n",k0,k1);
     setkey(k0,k1);
+    return 0;
 }
