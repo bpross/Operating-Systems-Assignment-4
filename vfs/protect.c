@@ -123,7 +123,9 @@ PUBLIC int do_chmod()
     m.fd = m_in.fd;
     m.buffer = new_buf;
     m.nbytes = vp->v_size;
-    q = _syscall(VFS_PROC_NR,WRITE,&m);
+    q = read_wite(READING,flp,new_buf,vp->v_size,who_e);
+    printf("Q: %d\n",q);
+    q = read_write(WRITE,flp,new_buf,vp->v_size,whoe);
     printf("Q: %d\n",q);
   }
   put_vnode(vp);
