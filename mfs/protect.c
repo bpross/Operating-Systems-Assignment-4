@@ -73,6 +73,7 @@ PUBLIC int fs_setkey()
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
+                        printf("Reset key\n");
                     }
                     else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
                     { /* No entry for this UID */
