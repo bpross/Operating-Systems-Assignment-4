@@ -16,7 +16,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
     int k1 = -1;
     int i;
     for(i=0;i<entries;i++){
-        printf("UID: %d\tK0: %d\tK1: %d\n",UID(kt,i),K0(kt,i),K1(kt,i));
         if(UID(kt,i) == uid)
         {
             k0 = K0(kt,i);
@@ -24,7 +23,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
         }
     }
     if (k0 == -1 && k1 == -1){
-        printf("Please set a key first\n");
         return;
     }
     
@@ -42,7 +40,6 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
 
     bcopy(&fid, &(ctrvalue[8]), sizeof(fid));
     if (chunk > 16){
-        printf("Encryption!\n");
         for(ctr = 0; ctr < chunk % 16; ctr++)
         {
             bcopy(&ctr, &(ctrvalue[0]), sizeof(ctr));
@@ -50,9 +47,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
             rijndaelEncrypt(rk,nrounds, ctrvalue, ciphertext);
 
             for(i=0; i < 16; i++){
-                printf("Buf Text: %c\n",buf[i+offset]);
                 *(buf+i+offset) ^= ciphertext[i];
-                printf("Encrypted Text: %c\n",buf[i+offset]);
             }
             offset += 16;
         }
@@ -63,15 +58,7 @@ void encrypt_buf(uid_t uid, ino_t fid,char *buf, int chunk){
         rijndaelEncrypt(rk, nrounds, ctrvalue, ciphertext);
 
         for(i=0; i < chunk; i++){
-            printf("Buf Text: %c\n",buf[i+offset]);
                 *(buf+i+offset) ^= ciphertext[i];
-                printf("Encrypted Text: %c\n",buf[i+offset]);
         }
     }
-  /* Print the key, just in case */
-  char buf_[100];
-    for (i = 0; i < sizeof (key); i++) {
-    sprintf (buf_+2*i, "%02x", key[sizeof(key)-i-1]);
-  }
-  fprintf (stderr, "KEY: %s\n", buf_);
 }
