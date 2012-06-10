@@ -53,7 +53,6 @@ PUBLIC int fs_setkey()
     int check;
     if(k1 == 0 && k0 == 0) /* We are deleting a key from the table */
     {
-        printf("In delete\n");
         int i;
         for(i = 0;i<MAX_KEY;i++)
         {
@@ -92,7 +91,7 @@ PUBLIC int fs_setkey()
                         UID(kt, i) = id;
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
-                        check = -2;
+                        check = -2; /* Key added Succesfully */
                         break;
                     }
                     else if( (K0(kt,i) == -1 && K1(kt, i)== -1))
@@ -101,10 +100,10 @@ PUBLIC int fs_setkey()
                         K0(kt, i) = k0;
                         K1(kt, i) = k1;
                         entries++;
+                        check = 1; /* Key added Successfully */
                         break;
                     }
                 }
-                check = 1; /* Key added Successfully */
             }
         }
     }
