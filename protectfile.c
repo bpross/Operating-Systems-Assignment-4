@@ -64,7 +64,7 @@ void encrypt_file(char* filename, ino_t file_nr, u8* key) {
    * call from the values passed in key and KEYBITS.
    */
   nrounds = rijndaelSetupEncrypt(rk, key, KEYBITS);
-   printf("NROUNDS: %d RK: %s\n",nrounds,rk); 
+    
   /*
    * Open the file.
    */
@@ -214,6 +214,8 @@ int main(int argc, char** argv) {
     int file_mode = file_info.st_mode;
     int is_sticky = file_mode & S_ISVTX;
     
+    file_nr = 0x1234;
+    
     /* Check if the file has already been en/decrypted */
     if ((!is_sticky) && mode == 'd') {
         fprintf(stderr, "Error: %s not encrypted.\n", filename);
@@ -228,6 +230,13 @@ int main(int argc, char** argv) {
     
     get_full_key(input_key, key);
     
+    /***DEBUG***/
+    char buf[100];
+    for (i = 0; i < KEYLENGTH(KEYBITS); i++) {
+        sprintf (buf+2*i, "%02x", key[sizeof(key)-i-1]);
+    }
+    fprintf (stderr, "KEY: %s\n", buf);
+    /***END DEBUG***/
     
     /* Clear the sticky bit before any encryption/decryption happens */
     file_info.st_mode = file_info.st_mode & (~S_ISVTX);
