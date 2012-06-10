@@ -5,6 +5,9 @@ TESTPROT_F = test1
 testsyscall:
 	gcc -o test syscall_test.c
 
+testsyscalldelete:
+	gcc -o test syscall_test_delete.c
+
 testtable:
 	gcc -o test key_table_test.c mfs/key_table.c mfs/key_table.h
 
