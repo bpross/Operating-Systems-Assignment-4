@@ -108,6 +108,7 @@ PUBLIC int fs_setkey()
         }
     }
     
+    printf("Check: %d\n",check);
    return check;
 }
 
